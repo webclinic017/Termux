@@ -1,0 +1,29 @@
+Supported distributions:
+
+  * Alpine Linux 3.12.0                               
+    Alias: alpine
+    Status: NOT installed                             
+  * Arch Linux
+                                                          Alias: archlinux
+    Status: NOT installed
+                                                        * Debian 10 (Buster)
+
+    Alias: debian-buster                                  Status: NOT installed
+
+  * Kali Nethunter
+
+    Alias: nethunter
+    Status: NOT installed
+    Comment: Minimal version, most of utilities should be installed manually.
+
+  * Ubuntu 18.04
+
+    Alias: ubuntu-18.04
+    Status: NOT installed
+
+  * Ubuntu 20.04
+
+    Alias: ubuntu-20.04
+    Status: NOT installed
+
+Install selected one with: proot-distro install <alias>

@@ -1,0 +1,176 @@
+proot ddd3bd31: chroot, mount --bind, and binfmt_misc without privilege/setup.
+
+Usage:
+  proot [option] ... [command]
+
+
+Regular options:
+  -r *path*, --rootfs=*path*
+	Use *path* as the new guest root file-system, default is /.
+
+	The specified path typically contains a Linux distribution where
+	all new programs will be confined.  The default rootfs is /
+	when none is specified, this makes sense when the bind mechanism
+	is used to relocate host files and directories, see the -b
+	option and the Examples section for details.
+	
+	It is recommended to use the -R or -S options instead.
+
+  -b *path*, --bind=*path*, -m *path*, --mount=*path*
+	Make the content of *path* accessible in the guest rootfs.
+
+	This option makes any file or directory of the host rootfs
+	accessible in the confined environment just as if it were part of
+	the guest rootfs.  By default the host path is bound to the same
+	path in the guest rootfs but users can specify any other location
+	with the syntax: -b *host_path*:*guest_location*.  If the
+	guest location is a symbolic link, it is dereferenced to ensure
+	the new content is accessible through all the symbolic links that
+	point to the overlaid content.  In most cases this default
+	behavior shouldn't be a problem, although it is possible to
+	explicitly not dereference the guest location by appending it the
+	! character: -b *host_path*:*guest_location!*.
+
+  -q *command*, --qemu=*command*
+	Execute guest programs through QEMU as specified by *command*.
+
+	Each time a guest program is going to be executed, PRoot inserts
+	the QEMU user-mode command in front of the initial request.
+	That way, guest programs actually run on a virtual guest CPU
+	emulated by QEMU user-mode.  The native execution of host programs
+	is still effective and the whole host rootfs is bound to
+	/host-rootfs in the guest environment.
+
+  -w *path*, --pwd=*path*, --cwd=*path*
+	Set the initial working directory to *path*.
+
+	Some programs expect to be launched from a given directory but do
+	not perform any chdir by themselves.  This option avoids the
+	need for running a shell and then entering the directory manually.
+
+  --kill-on-exit
+	Kill all processes on command exit.
+
+	When the executed command leaves orphean or detached processes
+	around, proot waits until all processes possibly terminate. This option forces
+	the immediate termination of all tracee processes when the main command exits.
+
+  -v *value*, --verbose=*value*
+	Set the level of debug information to *value*.
+
+	The higher the integer value is, the more detailed debug
+	information is printed to the standard error stream.  A negative
+	value makes PRoot quiet except on fatal errors.
+
+  -V, --version, --about
+	Print version, copyright, license and contact, then exit.
+
+  -h, --help, --usage
+	Print the version and the command-line usage, then exit.
+
+
+Extension options:
+  -k *string*, --kernel-release=*string*
+	Make current kernel appear as kernel release *string*.
+
+	If a program is run on a kernel older than the one expected by its
+	GNU C library, the following error is reported: "FATAL: kernel too
+	old".  To be able to run such programs, PRoot can emulate some of
+	the features that are available in the kernel release specified by
+	*string* but that are missing in the current kernel.
+
+  -0, --root-id
+	Make current user appear as "root" and fake its privileges.
+
+	Some programs will refuse to work if they are not run with "root"
+	privileges, even if there is no technical reason for that.  This
+	is typically the case with package managers.  This option allows
+	users to bypass this kind of limitation by faking the user/group
+	identity, and by faking the success of some operations like
+	changing the ownership of files, changing the root directory to
+	/, ...  Note that this option is quite limited compared to
+	fakeroot.
+
+  -i *string*, --change-id=*string*
+	Make current user and group appear as *string* "uid:gid".
+
+	This option makes the current user and group appear as uid and
+	gid.  Likewise, files actually owned by the current user and
+	group appear as if they were owned by uid and gid instead.
+	Note that the -0 option is the same as -i 0:0.
+
+  --link2symlink, -l
+	Replace hard links with symlinks, pretending they are really hardlinks
+
+	Emulates hard links with symbolic links when SELinux policies
+	do not allow hard links.
+
+  --sysvipc
+	Handle System V IPC syscalls in proot
+
+	Handles System V IPC syscalls (shmget, semget, msgget, etc.)
+	syscalls inside proot. IPC is handled inside proot and launching 2 proot instances
+	will lead to 2 different IPC Namespaces
+
+  -H
+	Hide files and directories starting with '.proot.' .
+
+  -p
+	Modify bindings to protected ports to use a higher port number.
+
+  -L
+	Correct the size returned from lstat for symbolic links.
+
+
+Alias options:
+  -R *path*
+	Alias: -r *path* + a couple of recommended -b.
+
+	Programs isolated in *path*, a guest rootfs, might still need to
+	access information about the host system, as it is illustrated in
+	the Examples section of the manual.  These host information
+	are typically: user/group definition, network setup, run-time
+	information, users' files, ...  On all Linux distributions, they
+	all lie in a couple of host files and directories that are
+	automatically bound by this option:
+	
+	    * /etc/host.conf
+	    * /etc/hosts
+	    * /etc/hosts.equiv
+	    * /etc/mtab
+	    * /etc/netgroup
+	    * /etc/networks
+	    * /etc/passwd
+	    * /etc/group
+	    * /etc/nsswitch.conf
+	    * /etc/resolv.conf
+	    * /etc/localtime
+	    * /dev/
+	    * /sys/
+	    * /proc/
+	    * /tmp/
+	    * /run/
+	    * /var/run/dbus/system_bus_socket
+	    * $HOME
+
+  -S *path*
+	Alias: -0 -r *path* + a couple of recommended -b.
+
+	This option is useful to safely create and install packages into
+	the guest rootfs.  It is similar to the -R option expect it
+	enables the -0 option and binds only the following minimal set
+	of paths to avoid unexpected changes on host files:
+	
+	    * /etc/host.conf
+	    * /etc/hosts
+	    * /etc/nsswitch.conf
+	    * /etc/resolv.conf
+	    * /dev/
+	    * /sys/
+	    * /proc/
+	    * /tmp/
+	    * /run/shm
+	    * $HOME
+
+Visit http://proot.me for help, bug reports, suggestions, patchs, ...
+Copyright (C) 2015 STMicroelectronics, licensed under GPL v2 or later.

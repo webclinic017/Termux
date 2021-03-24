@@ -1,0 +1,15 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+clear
+
+
+figlet WORDPRESS USERS
+
+echo -n "Masukan Url : "
+read f
+if [ ! -z $f ]
+then
+nmap -p80 --script http-wordpress-users $f
+else
+echo "Url Kosong!"
+fi

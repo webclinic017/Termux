@@ -1,0 +1,17 @@
+### Copy file.txt contents to clipboard ###
+$ pbcopy < file.txt
+
+######## Copy command to clipboard ########
+$ ps aux | pbcopy
+
+### Filter Copied command to clipboard ###
+$ ps aux | grep root | pbcopy
+
+####### Paste content of clipboard #######
+$ pbpaste
+
+### Paste clipboard content into a file ###
+$ pbpaste > pastetest.txt
+
+##### Filter Pasted clipboard content #####
+$ pbpaste | grep rcp

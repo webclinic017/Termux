@@ -1,0 +1,9 @@
+No remotes found - make a new one
+
+n) New remote
+
+s) Set configuration password
+
+q) Quit config
+
+n/s/q> 

@@ -1,0 +1,20 @@
+         -o          o-
+          +hydNNNNdyh+
+        +mMMMMMMMMMMMMm+
+      `dMMm:NMMMMMMN:mMMd`
+      hMMMMMMMMMMMMMMMMMMh
+  ..  yyyyyyyyyyyyyyyyyyyy  ..
+.mMMm`MMMMMMMMMMMMMMMMMMMM`mMMm.
+:MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:
+:MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:
+:MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:
+:MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:   u0_a738@localhost
+-MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM-   -----------------
+ +yy+ MMMMMMMMMMMMMMMMMMMM +yy+    OS: Android 9 aarch64
+      mMMMMMMMMMMMMMMMMMMm         Host: samsung SM-N950U
+      `/++MMMMh++hMMMM++/`         Kernel: 4.4.153-19551400
+          MMMMo  oMMMM             Uptime: 13 hours, 6 mins
+          MMMMo  oMMMM             Packages: 277 (dpkg), 1 (pkg)
+          oNMm-  -mMNs             Shell: zsh 5.8
+                                   CPU: Qualcomm MSM8998 (8) @ 1.900GHz
+                                   Memory: 3162MiB / 5214MiB

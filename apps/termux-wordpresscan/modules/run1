@@ -1,0 +1,16 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+clear
+
+figlet HOSTMAP
+figlet HACKER
+figlet TARGET
+
+echo -n "Masukan Url : "
+read a
+if [ ! -z $a ];
+then
+nmap -sV --script /data/data/com.termux/files/usr/bin/modules/hostmap-hackertarget.nse $a
+else
+echo "Url Kosong!"
+fi

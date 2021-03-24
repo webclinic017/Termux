@@ -1,0 +1,253 @@
+#		ALIASES
+
+#		Shortcuts
+alias cd1='cd ../; l'
+alias cd2='cd ../../; l'
+alias cd3='cd ../../../; l'
+alias cd-='cd -; l'
+alias ~='cd; l'
+alias h='cd; l'
+alias sd='cd /sdcard/; l'
+alias ins='cd /sdcard/github/Termux/installs/; l'
+alias pyt='cd /sdcard/github/Termux/python/; l'
+alias scr='cd /sdcard/github/Termux/scripts/; l'
+alias ven='cd /sdcard/github/Termux/python/venv/; l'
+alias app='cd /sdcard/github/Termux/apps/; l'
+alias d='cd /sdcard/Download/; l'
+alias doc='cd /sdcard/github/Termux/Documents/; l'
+alias gh='cd /sdcard/github/; l'
+alias ter='cd /sdcard/github/Termux/; l'
+alias res='cd /sdcard/github/Resources/; l'
+alias gists='cd /sdcard/github/Gists/; l'
+alias sdcard='cd /storage/4932-72CF/; l'
+alias music='cd /storage/4932-72CF/Music; l'
+alias h2h="cd /sdcard/github/Termux/Documents/'how to & help/'; l"
+alias syn="cd /storage/4932-72CF/Sync/; l"
+
+#		Git
+alias faa="git add .; git add -Af; git commit -m 'Add'; git push --force"
+alias gurl="git remote show origin"
+alias g='git clone'
+alias gpl='git pull'
+alias gp='git push'
+alias gco='git checkout'
+alias gcm='git checkout master'
+alias gr='git remote -v'
+alias gb='git branch -a'
+alias gl='git log --pretty -n 2 --stat'
+alias gs='git status -u'
+alias ga='git add . && git add -A'
+alias gf='git fetch'
+alias gfl='git ls-files | grep'
+alias gk='gitk --all --branches'
+alias gl='git log --pretty -n 2 --stat --decorate --all'
+alias gc='git commit -m'
+alias gi='git init'
+
+#		Python
+alias py='/data/data/com.termux/files/usr/bin/python3'
+alias py2='/data/data/com.termux/files/usr/bin/python2'
+alias python='/data/data/com.termux/files/usr/bin/python3'
+alias pip='/data/data/com.termux/files/usr/bin/python3 -m pip'
+alias pipi='/data/data/com.termux/files/usr/bin/python3 -m pip install'
+alias pipr='/data/data/com.termux/files/usr/bin/python3 -m pip install -r'
+alias pipu='/data/data/com.termux/files/usr/bin/python3 -m pip install --upgrade pip'
+alias pipur='/data/data/com.termux/files/usr/bin/python3 -m pip install --upgrade -r requirements.txt'
+alias pipurf='/data/data/com.termux/files/usr/bin/python3 -m pip install --upgrade --forse-reinstall -r requirements.txt'
+alias webserver='/data/data/com.termux/files/usr/bin/python3 -m http.server 8080'
+alias ve='virtualenv venv -p /data/data/com.termux/files/usr/bin/python3'
+alias va='source venv/bin/activate'
+
+#		YouTube-dl & Facebook-dl
+alias yt='youtube-dl'
+alias mp3="yt -v -f 'bestaudio[ext=mp3]/best' -ciw -o "%(title)s.%(ext)s" --extract-audio --audio-quality 0 --audio-format mp3"
+alias mp31="yt -v -f 'bestaudio[ext=mp3]/best' -ciw -o "%(title)s.%(ext)s" --extract-audio --audio-quality 0 --audio-format mp3 --yes-playlist --playlist-start 1"
+alias mp4="yt 'ytsearch:mp4' -v -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' -ciw -o "%(title)s.%(ext)s" mp4"
+alias mp41="yt 'ytsearch:mp4' -v -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' -ciw -o "%(title)s.%(ext)s" mp4 --yes-playlist --playlist-start 1"
+alias fbdl="py /sdcard/github/Termux/python/Facebook-Video-Downloader/downloader.py"
+
+#		Update
+alias pu='pkg update -y && pkg upgrade -y'
+alias au='apt update -y && apt upgrade -y'
+alias uu='au; pu; pip install upgrade pip; npm install -g npm'
+
+#		Documents
+alias pad='n ~/pad.txt'
+alias gdoc="n /sdcard/github/Resources/Git/'Git Commands.txt'"
+alias grdoc="n /sdcard/github/Resources/Git/'Git Repos.txt'"
+alias pydoc="n /sdcard/github/Resources/Python/'Python Commands.txt'"
+
+#		PHP
+alias pb='phpcs'
+alias pbf='phpcbf'
+
+#	   Exploits
+alias wifite="py2 /sdcard/github/Termux/python/wifite.py"
+
+#		Docker
+alias docker_start='systemctl start docker'
+alias docker_debian='docker run -it debian /bin/bash'
+
+#		Config
+alias ip='curl ifconfig.me'
+alias ifc='ifconfig wlan0'
+alias zshconfig="mate ~/.zshrc"
+alias ohmyzsh="mate ~/.oh-my-zsh"
+alias chcolor='/data/data/com.termux/files/home/.termux/colors.sh'
+alias chfont='/data/data/com.termux/files/home/.termux/fonts.sh'
+
+#		ETC
+alias l='ls -AFph --color=auto --show-control-chars'
+alias ld='ls -d $PWD/*'
+alias lr='ls -AFRph --color=auto --show-control-chars'
+alias nano='nano -BLMacu -T 4 -C /data/data/com.termux/files/home/backups/'
+alias n='nano -BLMacu -T 4 -C /data/data/com.termux/files/home/backups/'
+alias r='rm -rf'
+alias mv='mv -v'
+alias mvt='mv -t'
+alias mk='mkdir -p'
+alias cp='cp -R'
+alias c='cat'
+alias ch='chmod +x'
+alias to='termux-open'
+alias tts='> ~/.tts'
+alias cpget='termux-clipboard-get'
+alias cpset='termux-clipboard-set'
+alias wgetd="wget -r –level=0 -E –ignore-length -x -k -p -e robots=off -np -N"
+alias dot='find . -maxdepth 100 -type d | while read FNAME; do mv "$FNAME" "${FNAME//.git/DOTgit}"; done'
+alias undot='find . -maxdepth 100 -type d | while read FNAME; do mv "$FNAME" "${FNAME//DOTgit/.git}"; done'
+alias rm.='find . -depth -type d -name "*.git" -exec rm -rf {} \;'
+alias rmdot='find . -depth -type d -name "*DOTgit" -exec rm -rf {} \;'
+alias mocp="mocp; mocp -x"
+alias clear_cache="paccache -rk0"
+alias inotify_increase="echo fs.inotify.max_user_watches=524288 | tee /etc/sysctl.d/40-max-user-watches.conf && sysctl --system"
+alias fixadb="adb kill-server && adb devices"
+alias dmenu_fixed="dmenu_run -fn '-xos4-terminus-medium-r-*-*-14-*' -h 26"
+alias cleanphoto="exiftool -all= $*"
+alias tree='tree -C'
+alias ip='ip -c'
+alias brew="termux-chroot ~/.linuxbrew/Homebrew/bin/brew"
+alias kali='bash ~/start-kali.sh'
+alias fedora='startfedora'
+alias arch='startarch'
+alias anyfed='~/.anyfed/anyfed'
+alias call='termux-telephony-call'
+alias sms='termux-sms-send -n'
+alias google='w3m google.com'
+alias x='exit'
+
+clear
+
+cat /data/data/com.termux/files/home/etc/motd
+alias la="git config -l | grep alias
+| cut -c 7-"
+alias dea="deactivate"
+
+#							<-- WGET -->
+
+#   <-- Download Complete Directory -->
+alias wgetd="wget -r –level=0 -E –ignore-length -x -k -p -e robots=off -np -N"
+
+#   <-- Download all mp3 music files, just
+ change the above to -->
+alias wgetf="wget -r -A"
+
+#			   <-- Find Commands -->
+
+# Find 50MB Files
+alias find50='find / -size 50M'
+
+# Find Size between 50MB � 100MB
+alias find50-100='find / -size +50M -size -100M'
+
+# Find and Delete 100MB Files
+alias rm100='find / -type f -size +100M -exec
+ rm -rf {} \;'
+
+# Rename all .git folders
+alias dot='find . -depth -type d | while read
+ FNAME; do mv "$FNAME" "${FNAME//.git/DOTgit
+}"; done'
+
+# Rename all DOTgit folders
+alias undot='find . -depth -type d | while
+ read FNAME; do mv "$FNAME" "${FNAME//DOTgit/
+.git}"; done'
+
+# To find and remove .git & .github.
+alias rm.='find . -depth -type d -name ".git"
+ -exec rm -rf {} \; && find . -depth -type d
+ -name ".github" -exec rm -rf {} \;'
+
+# To find and remove DOTgit & DOTgithub.
+alias rmdot='find . -depth -type d -name
+ "DOTgit" -exec rm -rf {} \; && find . -depth
+ -type d -name "DOTgithub" -exec rm -rf {} \;'
+
+# Find empty directories
+alias empd='find . -type d -empty'
+
+# Find empty sized files
+alias rmempf='find . -type f -empty'
+
+# Removing 0 sized files
+alias rm0='find . -exec rm -rf {} +'
+alias rm01='find . -print0 | xargs -0 rm -rf'
+alias rm02='find . -delete'
+
+#          <-- Delete all Empty Folders -->
+alias rmemp='while [ -n "$(find . -depth -type d -empty -print -exec rm -rf {} +)" ]; do :; done'
+alias rmemp1='find . -depth -type d -exec rm -rf {} \; 2>/dev/null'
+alias rmemp2='find -empty -delete'
+
+# Delete empty directories when `-delete`
+ option is not available. output null
+ character (instead of newline) as separator.
+ used together with `xargs -0`, will handle
+ filenames with spaces and special chars.
+alias rmemp3='find-empty -print0 | xargs -0
+ rmdir -p'
+
+# Alternative version using `-exec` with `+`,
+ similar to xargs. {}: path of current file +:
+ {} is replaced with as many pathnames as
+ possible for each invocation.
+alias rmemp4='find -empty -exec rmdir -p {} +'
+
+# Find all the files whose permissions are 777.
+alias 777='find . -type f -perm 0777 -print'
+alias 777-1='find / -type f ! -perm 777'
+
+# Find all the SGID bit files whose
+ permissions set to 644.
+alias 644='find / -perm 2644'
+
+# Find all the Sticky Bit set files whose
+ permission are 551.
+alias 551='find / -perm 1551'
+
+# Find all SUID set files.
+alias suid='find / -perm /u=s'
+
+# Find all SGID set files.
+alias sgid='find / -perm /g=s'
+
+# Find all Read Only files.
+alias readonly='find / -perm /u=r'
+
+# Find all Executable files.
+alias fexe='find / -perm /a=x'
+
+# Find all 777 permission files and use chmod
+ command to set permissions to 644.
+alias 777ch644='find / -type f -perm 0777
+ -print -exec chmod 644 {} \;'
+
+# Find all 777 permission directories and use
+ chmod command to set permissions to 755.
+alias 777ch755='find / -type d -perm 777
+ -print -exec chmod 755 {} \;'
+
+#			   <-- Codecov Bash uploader -->
+
+alias cov="bash <(curl -s https://codecov.io/bash) -t 68672765-268f-44d0-8a4fa0e3e4de5248"

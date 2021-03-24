@@ -1,0 +1,31 @@
+Termux-sms-list - Termux Wiki
+
+List SMS messages.   
+
+Usage 
+
+termux-sms-list [options] 
+Output displayed in json format.  
+
+Options
+
+-d show dates when messages were created
+
+-l limit offset in sms list (default: 10) 
+
+-n show phone numbers
+
+-o offset offset in sms list (default: 0)
+
+-t type the type of messages to list (default: inbox): all|inbox|sent|draft|outbox  
+
+Note 
+
+Usage of this API is no longer allowed by Google and we had to disable it to prevent delisting of Termux:API application from the Google Play. 
+
+The return message is:
+{"error": "Reading SMS is no longer permitted by Google"}  
+
+See Also 
+
+Termux:API - Termux addon that exposes device functionality as API to command line programs.

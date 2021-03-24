@@ -1,0 +1,9 @@
+# How to use DarkFly-Tool
+
+Step 1: Now You can type DarkFly to run the tool anytime you want.
+
+Step 2: Now you will see 5 options you can select any option but the main option is the 1st one. you can also use spam tools by typing 2 but I am selecting the 1st option.
+
+Type 1 and press ENTER.
+
+Step 3: Now you will see a list of 530 tools that are specially made for termux, Select any tool by typing its serial number and the tool will be Downloaded in your Termux.

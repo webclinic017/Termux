@@ -1,0 +1,16 @@
+    #!/data/data/com.termux/files/usr/bin/sh
+    echo "Entering anyfed Fedora chroot..."
+
+    mount -t proc proc "~/.anyfed/rootfs/proc"
+    mount -t sysfs sys "~/.anyfed/rootfs/sys/"
+    mount -o bind /dev "~/.anyfed/rootfs/dev"
+    mount -o bind /dev "~/.anyfed/rootfs/dev/pts"
+
+    chroot "~/.anyfed/rootfs" /bin/env -i         HOME=/root TERM="xterm-256color" PS1='[root@anyfed \W]$ '         PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin         /bin/bash --login
+
+    echo "Exiting anyfed Fedora chroot..."
+    umount "~/.anyfed/rootfs/dev/pts"
+    umount "~/.anyfed/rootfs/dev"
+    umount "~/.anyfed/rootfs/sys/"
+    umount "~/.anyfed/rootfs/proc"
+    echo "Cleaned up..."

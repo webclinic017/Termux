@@ -1,0 +1,33 @@
+Enter the words or characters you would like to
+ search for, and then press Enter.  If there is a
+ match for the text you entered, the screen will   be updated to the location of the nearest match
+ for the search string.
+
+ The previous search string will be shown in
+ brackets after the search prompt.  Hitting Enter
+ without entering any text will perform the
+ previous search.  If you have selected text with
+ the mark and then search to replace, only matches
+
+ in the selected text will be replaced.
+
+ The following function keys are available in
+ Search mode:
+
+^G     (F1)      Display this help text
+^C               Cancel the current function
+
+M-C              Toggle the case sensitivity of
+                   the search
+M-R              Toggle the use of regular
+                   expressions
+M-B              Reverse the direction of the
+                   search
+
+^R               Search forward for a string or a
+                   regular expression
+
+^P     (▲)       Recall the previous
+                   search/replace string
+^N     (▼)       Recall the next search/replace
+                   string

@@ -1,0 +1,48 @@
+		"ffplay" Interactive Commands
+
+This section provides a tutorial example on how to use 'ffplay' interactive commands to seek a play particular position while playing a video file.
+
+While playing a movie with the "ffplay", you can also control the playing process using the following interactive commands:
+
+q, ESC            quit
+
+f                 toggle full screen
+
+p, SPC            pause
+
+a                 cycle audio channel in the current program
+
+v                 cycle video channel
+
+t                 cycle subtitle channel in the current program
+
+c                 cycle program
+
+w                 cycle video filters or show modes
+
+s                 activate frame-step mode
+
+left/right        seek backward/forward 10 seconds
+
+down/up           seek backward/forward 1 minute
+
+page down/page up seek backward/forward 10 minutes
+
+mouse click       seek to percentage in file corresponding 
+                  to fraction of width
+Let use these interactive commands to locate the ending position of the "Anchor 'Great Escape'" segment.
+
+1. Run "ffplay" to play "Tony_reelshow_2009_512kb.mp4". The movie player starts.
+
+2. Click the player screen at about 22% width position. The player seeks to 00:00:42 position and displays the following on the console:
+
+Seek to 22% ( 0:00:42) of total duration ( 0:03:11)       B f=0/0
+3. Press "p" to stop the play. The player displays a still image of the "Anchor 'Great Escape'" segment.
+
+4. Press "s" to step 1 frame forward. The player shows the following on the console:
+
+  42.03 A-V:  0.028 fd=  96 aq=    5KB vq=    9KB sq=    0B f=0/0
+5. Press <right> arrow key to seek forward for 10 seconds. The player displays a still image of the next movie segment with the following on the console:
+
+  52.03 A-V:    nan fd=  96 aq=    1KB vq=   19KB sq=    0B f=0/0
+6. Press <left> arrow key to seek backward for 10 seconds. Then press "s" many times until you see the last image of the "Anchor 'Great Escape'" segment. It should be at 00:00:43.33.

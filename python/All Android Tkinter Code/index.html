@@ -1,0 +1,901 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">      <!-- Unicode -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">   <!-- mobile -->
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}    /* text of title, etc. */
+html {-webkit-text-size-adjust: 100%;}               /* ios landscape no zoom */
+
+body {
+   margin-left: 12px;     /* offset the entire page for curved screens */
+   margin-right: 12px;    /* or padding: inside a border (margin outside) */
+}
+</style>
+<!-- plus analytics code, etc. -->
+<title>Android tkinter Demos</title>
+</head>
+
+<body>
+<h1>Android tkinter Demos</h1>
+
+<p>
+This page collects Android screenshots of all the tkinter-GUI programs 
+described in 
+<A HREF="https://learning-python.com/using-tkinter-programs-on-android.html">this doc</A>.
+Shots are grouped by program, and can be viewed in slideshow mode 
+by tapping Auto on any image-viewer page.  Among the subfolders here, 
+<I>CODE</I> hosts all the patch files needed to run these
+programs on Android, and <I>Sizing</I> has additional 
+screenshots that demo the effects of DPI and font settings.
+Some shots here also demo issues that were resolved by work-arounds described in the
+<A HREF="https://learning-python.com/using-tkinter-programs-on-android.html">tkinter</A>
+or related 
+<A HREF="https://learning-python.com/mergeall-android-scripts/_README.html#toc8">Mergeall</A>
+docs.
+</p>
+
+<!-- ======================================================================= -->
+<!-- END CUSTOM HEADER -->
+<!-- ======================================================================= -->
+
+
+<!-- ======================================================================= -->
+<!-- START FLOATING TOP -->
+<!-- ======================================================================= -->
+
+
+<!-- HTML+styles+JavaScript for optional index floating Top button [2.0].  --> 
+<!-- Formatting targets are replaced with user configs by Py build script. -->
+<!-- All inline, to avoid extra requirements for custom HEADER.html files, -->
+<!-- (though browsers allow <style> blocks in <body>, as does HTML 5.2+).  -->  
+<!-- Top goes to page top only: use custom headers or edit this for other. -->
+
+<!-- Clients using a custom FOOTER.html may also need something like this:
+.finalelement {               /* add extra space above Top's bottom at end of page */
+    margin-bottom: 80px;      /* else, text at end may be overlayed and unviewable */
+}
+<P class=finalelement>        <==on the last content line or item (or <div>+padding, <br>)
+-->
+
+</P>
+<button onclick="topClick();" 
+        id="topBtn" 
+        title="Go to index"
+        style="
+    display: none;                   /* initially HIDDEN (changed on scroll iff JS) */
+    position: fixed;                 /* float/persist */
+    bottom: 36px;       /* e.g., above site toolbar */
+    right: 8px;                      /* left of scroll area */
+    z-index: 99;                     /* covering priority */
+    font-size: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;                 /* change on mouse-over */
+    padding: 10px;
+    border-radius: 4px;              /* rounded corners */
+    color: white;             /* foreground (text) color, default=white */
+    background-color: #999;  /* background color, default=grey */ 
+">Top</button>
+
+<!-- Set up click/scroll callbacks iff JS is enabled -->
+<script>
+
+// Get and save the button in global (window) scope
+var topButton = document.getElementById("topBtn");    // i.e., "Top" above
+
+// Set the default scroll constant: global so pages can change if needed
+var topButtonShowAt = 500;    // px from top, show Top below this cutoff
+
+function topClick() {
+    //
+    // Go to the top of page (but keep prior location in history for back).
+    // Clear hover shading (else recessed color gets stuck on mobile)?
+    // No: unhover doesn't work as tried for main site - punt on shading. 
+    //
+    window.location.href = '#';                    // go/scroll to top (no tag)
+    //topButton.style.backgroundColor = '#999';    // no: unhover for mobile?
+}
+
+function scrollFunction() {
+    //
+    // Adapted from web examples; the odd || test is for browser interoperability:
+    // see, for instance, https://dev.opera.com/articles/fixing-the-scrolltop-bug/.
+    //
+    // Clients can reset global topButtonShowAt for larger preambles; else Top 
+    // may appear above/before the actual # top content if it's not top of page.     
+    //
+    var showat = topButtonShowAt;  // local
+    // N pixels from the top after scroll?
+    if (document.body.scrollTop > showat || document.documentElement.scrollTop > showat) {
+        topButton.style.display = "block";   // show Top
+    } else {
+        topButton.style.display = "none";    // hide Top
+    }
+}
+
+// Show/hide button whenever user scrolls below/above N px from top
+window.onscroll = scrollFunction;   // source had "function() {scrollFunction()};"; why?
+</script>
+
+
+<!-- ======================================================================= -->
+<!-- END FLOATING TOP -->
+<!-- ======================================================================= -->
+
+
+<!-- ======================================================================= -->
+<!-- START SUBFOLDER LINKS -->
+<!-- ======================================================================= -->
+
+<p><b>Subfolders here:</b><div style="margin-bottom: 30px;"><p><ul>
+<li style="margin-bottom: 6px;"><A href="CODE/">CODE</A>
+<li style="margin-bottom: 6px;"><A href="Sizing/">Sizing</A>
+<li style="margin-bottom: 6px;"><A href="etc/">etc</A>
+</ul></p></div>
+
+<!-- ======================================================================= -->
+<!-- END SUBFOLDER LINKS -->
+<!-- ======================================================================= -->
+
+
+<!-- ======================================================================= -->
+<!-- START THUMBS TABLE -->
+<!-- ======================================================================= -->
+
+
+<p>
+<div style="overflow-x: auto;">
+<table style="                        /* not used: table-layout:fixed; */
+    background-color: #f5f5f5;                     /* for fun (former 'white') */
+    width: 100%;                             /* expand table+borderlines */
+    margin-top: 5px; margin-bottom: 5px;      /* above/below borderlines */
+    padding-top: 25px; padding-bottom: 5px;   /* under/over borderlines  */
+    border-top: 1px solid black;              /* manual lines, _not_ <hr>s: */ 
+    border-bottom: 1px solid black;           /* chrome botches <hr> at zoom <= 90% */
+">
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/PythonPowered.gif.html">
+	<img src="_thumbspage/PythonPowered.gif" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">PythonPowered.gif</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-1.jpg.html">
+	<img src="_thumbspage/frigcal-1.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-1.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-2.jpg.html">
+	<img src="_thumbspage/frigcal-2.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-2.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-3.jpg.html">
+	<img src="_thumbspage/frigcal-3.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-3.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-4.jpg.html">
+	<img src="_thumbspage/frigcal-4.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-4.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-5-save-nougat-fails-1.png.html">
+	<img src="_thumbspage/frigcal-5-save-nougat-fails-1.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-5-save-nougat-fails-1.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-6-save-nougat-fails-2.png.html">
+	<img src="_thumbspage/frigcal-6-save-nougat-fails-2.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-6-save-nougat-fails-2.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-7-save-oreo-works-2.jpg.html">
+	<img src="_thumbspage/frigcal-7-save-oreo-works-2.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-7-save-oreo-works-2.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-7-save-oreo-works.jpg.html">
+	<img src="_thumbspage/frigcal-7-save-oreo-works.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-7-save-oreo-works.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-android-calendar-make.jpg.html">
+	<img src="_thumbspage/frigcal-android-calendar-make.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-android-calendar-make.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-android-calendar-open.jpg.html">
+	<img src="_thumbspage/frigcal-android-calendar-open.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-android-calendar-open.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-android-calendar-use.jpg.html">
+	<img src="_thumbspage/frigcal-android-calendar-use.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-android-calendar-use.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-events-list.jpg.html">
+	<img src="_thumbspage/frigcal-events-list.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-events-list.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-events-portrait.jpg.html">
+	<img src="_thumbspage/frigcal-events-portrait.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-events-portrait.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-footer.jpg.html">
+	<img src="_thumbspage/frigcal-footer.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-footer.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-fullscreen-nav.jpg.html">
+	<img src="_thumbspage/frigcal-fullscreen-nav.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-fullscreen-nav.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-fullscreen.jpg.html">
+	<img src="_thumbspage/frigcal-fullscreen.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-fullscreen.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-help-html.jpg.html">
+	<img src="_thumbspage/frigcal-help-html.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-help-html.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-launcher-fails.jpg.html">
+	<img src="_thumbspage/frigcal-launcher-fails.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-launcher-fails.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-launcher-noguichildopen.png.html">
+	<img src="_thumbspage/frigcal-launcher-noguichildopen.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-launcher-noguichildopen.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-launcher-postsysexe.png.html">
+	<img src="_thumbspage/frigcal-launcher-postsysexe.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-launcher-postsysexe.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-multiwindow.jpg.html">
+	<img src="_thumbspage/frigcal-multiwindow.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-multiwindow.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-nonfullscreen.jpg.html">
+	<img src="_thumbspage/frigcal-nonfullscreen.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-nonfullscreen.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-options-list-truncated.jpg.html">
+	<img src="_thumbspage/frigcal-options-list-truncated.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-options-list-truncated.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-pinchzoom.png.html">
+	<img src="_thumbspage/frigcal-pinchzoom.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-pinchzoom.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-rightswipe-event-0.jpg.html">
+	<img src="_thumbspage/frigcal-rightswipe-event-0.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-rightswipe-event-0.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-rightswipe-event-menu.jpg.html">
+	<img src="_thumbspage/frigcal-rightswipe-event-menu.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-rightswipe-event-menu.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-s5.5in-land-event.png.html">
+	<img src="_thumbspage/frigcal-s5.5in-land-event.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-s5.5in-land-event.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-s5.5in-land-select.png.html">
+	<img src="_thumbspage/frigcal-s5.5in-land-select.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-s5.5in-land-select.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-s5.5in-landscape.png.html">
+	<img src="_thumbspage/frigcal-s5.5in-landscape.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-s5.5in-landscape.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-s5.5in-portrait.png.html">
+	<img src="_thumbspage/frigcal-s5.5in-portrait.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-s5.5in-portrait.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-update-no-termuxappdir-0.jpg.html">
+	<img src="_thumbspage/frigcal-update-no-termuxappdir-0.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-update-no-termuxappdir-0.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-update-no-termuxappdir-1.jpg.html">
+	<img src="_thumbspage/frigcal-update-no-termuxappdir-1.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-update-no-termuxappdir-1.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-update-no-termuxappdir-2.jpg.html">
+	<img src="_thumbspage/frigcal-update-no-termuxappdir-2.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-update-no-termuxappdir-2.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-update-no-termuxappdir-3.jpg.html">
+	<img src="_thumbspage/frigcal-update-no-termuxappdir-3.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-update-no-termuxappdir-3.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-update-no-termuxappdir-4.jpg.html">
+	<img src="_thumbspage/frigcal-update-no-termuxappdir-4.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-update-no-termuxappdir-4.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-update-no-termuxappdir-5.jpg.html">
+	<img src="_thumbspage/frigcal-update-no-termuxappdir-5.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-update-no-termuxappdir-5.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-update-ok-internalstorage.jpg.html">
+	<img src="_thumbspage/frigcal-update-ok-internalstorage.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-update-ok-internalstorage.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-xbtnfont-j7-after.png.html">
+	<img src="_thumbspage/frigcal-xbtnfont-j7-after.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-xbtnfont-j7-after.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-xbtnfont-j7before.png.html">
+	<img src="_thumbspage/frigcal-xbtnfont-j7before.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-xbtnfont-j7before.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-xbtnfont-note9-after.jpg.html">
+	<img src="_thumbspage/frigcal-xbtnfont-note9-after.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-xbtnfont-note9-after.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/frigcal-xbtnfont-note9-before.jpg.html">
+	<img src="_thumbspage/frigcal-xbtnfont-note9-before.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">frigcal-xbtnfont-note9-before.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-help-html.jpg.html">
+	<img src="_thumbspage/mergeall-help-html.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-help-html.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-landscape-1.jpg.html">
+	<img src="_thumbspage/mergeall-landscape-1.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-landscape-1.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-landscape-2.jpg.html">
+	<img src="_thumbspage/mergeall-landscape-2.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-landscape-2.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-landscape-3.jpg.html">
+	<img src="_thumbspage/mergeall-landscape-3.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-landscape-3.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-landscape-4.jpg.html">
+	<img src="_thumbspage/mergeall-landscape-4.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-landscape-4.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-landscape-5.jpg.html">
+	<img src="_thumbspage/mergeall-landscape-5.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-landscape-5.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-landscape-6.jpg.html">
+	<img src="_thumbspage/mergeall-landscape-6.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-landscape-6.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-nonmax-landscape.jpg.html">
+	<img src="_thumbspage/mergeall-nonmax-landscape.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-nonmax-landscape.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-nonmax-nonfull-portrait.jpg.html">
+	<img src="_thumbspage/mergeall-nonmax-nonfull-portrait.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-nonmax-nonfull-portrait.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-nonmax-portrait.jpg.html">
+	<img src="_thumbspage/mergeall-nonmax-portrait.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-nonmax-portrait.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-portrait-1.jpg.html">
+	<img src="_thumbspage/mergeall-portrait-1.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-portrait-1.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-portrait-2.jpg.html">
+	<img src="_thumbspage/mergeall-portrait-2.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-portrait-2.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-portrait-3.jpg.html">
+	<img src="_thumbspage/mergeall-portrait-3.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-portrait-3.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-portrait-4.jpg.html">
+	<img src="_thumbspage/mergeall-portrait-4.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-portrait-4.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-portrait-5.jpg.html">
+	<img src="_thumbspage/mergeall-portrait-5.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-portrait-5.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-portrait-6.jpg.html">
+	<img src="_thumbspage/mergeall-portrait-6.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-portrait-6.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-shorten-5.5-custom.png.html">
+	<img src="_thumbspage/mergeall-shorten-5.5-custom.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-shorten-5.5-custom.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-shorten-5.5-orig.png.html">
+	<img src="_thumbspage/mergeall-shorten-5.5-orig.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-shorten-5.5-orig.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-shorten-5.5-try1.png.html">
+	<img src="_thumbspage/mergeall-shorten-5.5-try1.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-shorten-5.5-try1.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-shorten-5.5-try2.png.html">
+	<img src="_thumbspage/mergeall-shorten-5.5-try2.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-shorten-5.5-try2.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-shorten-6.N-custom.png.html">
+	<img src="_thumbspage/mergeall-shorten-6.N-custom.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-shorten-6.N-custom.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-shorten-6.N-try1.jpg.html">
+	<img src="_thumbspage/mergeall-shorten-6.N-try1.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-shorten-6.N-try1.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-shorten-6.N-try2.png.html">
+	<img src="_thumbspage/mergeall-shorten-6.N-try2.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-shorten-6.N-try2.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-shorten-PC-orig.png.html">
+	<img src="_thumbspage/mergeall-shorten-PC-orig.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-shorten-PC-orig.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-to-sdcard.jpg.html">
+	<img src="_thumbspage/mergeall-to-sdcard.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-to-sdcard.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/mergeall-x-logfile-popup.jpg.html">
+	<img src="_thumbspage/mergeall-x-logfile-popup.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">mergeall-x-logfile-popup.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-1.png.html">
+	<img src="_thumbspage/pp4e-book-1.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-1.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-2.png.html">
+	<img src="_thumbspage/pp4e-book-2.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-2.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-3.png.html">
+	<img src="_thumbspage/pp4e-book-3.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-3.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-4.png.html">
+	<img src="_thumbspage/pp4e-book-4.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-4.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-5.png.html">
+	<img src="_thumbspage/pp4e-book-5.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-5.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-6.jpg.html">
+	<img src="_thumbspage/pp4e-book-6.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-6.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-7-console.jpg.html">
+	<img src="_thumbspage/pp4e-book-7-console.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-7-console.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-7.jpg.html">
+	<img src="_thumbspage/pp4e-book-7.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-7.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-8.jpg.html">
+	<img src="_thumbspage/pp4e-book-8.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-8.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-9.jpg.html">
+	<img src="_thumbspage/pp4e-book-9.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-9.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-larch-noico.jpg.html">
+	<img src="_thumbspage/pp4e-book-larch-noico.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-larch-noico.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-pyview-1.png.html">
+	<img src="_thumbspage/pp4e-book-pyview-1.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-pyview-1.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-pyview-2.png.html">
+	<img src="_thumbspage/pp4e-book-pyview-2.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-pyview-2.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pp4e-book-pyview-postsyspath.png.html">
+	<img src="_thumbspage/pp4e-book-pyview-postsyspath.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pp4e-book-pyview-postsyspath.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/program-file-shortcuts-1-es.jpg.html">
+	<img src="_thumbspage/program-file-shortcuts-1-es.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">program-file-shortcuts-1-es.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/program-file-shortcuts-2-tc.png.html">
+	<img src="_thumbspage/program-file-shortcuts-2-tc.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">program-file-shortcuts-2-tc.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pydroid3-3.0-pyexepath-bug.jpg.html">
+	<img src="_thumbspage/pydroid3-3.0-pyexepath-bug.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pydroid3-3.0-pyexepath-bug.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pydroid3-3.0-webrowser-bug.jpg.html">
+	<img src="_thumbspage/pydroid3-3.0-webrowser-bug.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pydroid3-3.0-webrowser-bug.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pydroid3-IDE.jpg.html">
+	<img src="_thumbspage/pydroid3-IDE.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pydroid3-IDE.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pydroid3-notific-keyboard.jpg.html">
+	<img src="_thumbspage/pydroid3-notific-keyboard.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pydroid3-notific-keyboard.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pydroid3-viewing-modes.png.html">
+	<img src="_thumbspage/pydroid3-viewing-modes.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pydroid3-viewing-modes.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-1.png.html">
+	<img src="_thumbspage/pyedit-1.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-1.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-2.jpg.html">
+	<img src="_thumbspage/pyedit-2.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-2.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-grep-fail-1.png.html">
+	<img src="_thumbspage/pyedit-grep-fail-1.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-grep-fail-1.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-grep-fail-2.png.html">
+	<img src="_thumbspage/pyedit-grep-fail-2.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-grep-fail-2.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-grep-fail-3.png.html">
+	<img src="_thumbspage/pyedit-grep-fail-3.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-grep-fail-3.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-grep-works-postconfigedit.png.html">
+	<img src="_thumbspage/pyedit-grep-works-postconfigedit.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-grep-works-postconfigedit.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-grep.png.html">
+	<img src="_thumbspage/pyedit-grep.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-grep.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-help-html.jpg.html">
+	<img src="_thumbspage/pyedit-help-html.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-help-html.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-help-text-both-l.jpg.html">
+	<img src="_thumbspage/pyedit-help-text-both-l.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-help-text-both-l.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-help-text-both-p.jpg.html">
+	<img src="_thumbspage/pyedit-help-text-both-p.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-help-text-both-p.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-help-text.jpg.html">
+	<img src="_thumbspage/pyedit-help-text.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-help-text.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-info.png.html">
+	<img src="_thumbspage/pyedit-info.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-info.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-open.png.html">
+	<img src="_thumbspage/pyedit-open.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-open.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-popup-and-menu.png.html">
+	<img src="_thumbspage/pyedit-popup-and-menu.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-popup-and-menu.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-popup-presymbols.png.html">
+	<img src="_thumbspage/pyedit-popup-presymbols.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-popup-presymbols.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-popup.png.html">
+	<img src="_thumbspage/pyedit-popup.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-popup.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-runcode-fails.png.html">
+	<img src="_thumbspage/pyedit-runcode-fails.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-runcode-fails.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-runcode-works-postsysexe.png.html">
+	<img src="_thumbspage/pyedit-runcode-works-postsysexe.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-runcode-works-postsysexe.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-save-on-exit.jpg.html">
+	<img src="_thumbspage/pyedit-save-on-exit.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-save-on-exit.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-sized-left.png.html">
+	<img src="_thumbspage/pyedit-sized-left.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-sized-left.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-sized-right.png.html">
+	<img src="_thumbspage/pyedit-sized-right.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-sized-right.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-unicode-botched.jpg.html">
+	<img src="_thumbspage/pyedit-unicode-botched.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-unicode-botched.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-view-1-nonfull-nonmax.png.html">
+	<img src="_thumbspage/pyedit-view-1-nonfull-nonmax.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-view-1-nonfull-nonmax.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-view-2-nonfull-max.png.html">
+	<img src="_thumbspage/pyedit-view-2-nonfull-max.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-view-2-nonfull-max.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-view-3-full-max-nav.png.html">
+	<img src="_thumbspage/pyedit-view-3-full-max-nav.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-view-3-full-max-nav.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-view-4-full-max-nonav.png.html">
+	<img src="_thumbspage/pyedit-view-4-full-max-nonav.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-view-4-full-max-nonav.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-weird-cursor-rectangles.jpg.html">
+	<img src="_thumbspage/pyedit-weird-cursor-rectangles.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-weird-cursor-rectangles.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-x-runclick-handler.jpg.html">
+	<img src="_thumbspage/pyedit-x-runclick-handler.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-x-runclick-handler.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pyedit-x-runclick-options.jpg.html">
+	<img src="_thumbspage/pyedit-x-runclick-options.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pyedit-x-runclick-options.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-launcher-postsysexefix.png.html">
+	<img src="_thumbspage/pygadgets-launcher-postsysexefix.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-launcher-postsysexefix.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-launcher-spawn-fails.png.html">
+	<img src="_thumbspage/pygadgets-launcher-spawn-fails.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-launcher-spawn-fails.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-launcher.jpg.html">
+	<img src="_thumbspage/pygadgets-launcher.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-launcher.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-launcher2.jpg.html">
+	<img src="_thumbspage/pygadgets-launcher2.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-launcher2.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-noguichildopen.png.html">
+	<img src="_thumbspage/pygadgets-noguichildopen.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-noguichildopen.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-1.jpg.html">
+	<img src="_thumbspage/pygadgets-pycalc-1.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-1.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-1b.jpg.html">
+	<img src="_thumbspage/pygadgets-pycalc-1b.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-1b.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-2.jpg.html">
+	<img src="_thumbspage/pygadgets-pycalc-2.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-2.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-2b.jpg.html">
+	<img src="_thumbspage/pygadgets-pycalc-2b.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-2b.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-3.jpg.html">
+	<img src="_thumbspage/pygadgets-pycalc-3.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-3.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-4.jpg.html">
+	<img src="_thumbspage/pygadgets-pycalc-4.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-4.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-5.jpg.html">
+	<img src="_thumbspage/pygadgets-pycalc-5.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-5.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-help-open.jpg.html">
+	<img src="_thumbspage/pygadgets-pycalc-help-open.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-help-open.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-help-text.jpg.html">
+	<img src="_thumbspage/pygadgets-pycalc-help-text.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-help-text.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-hist.jpg.html">
+	<img src="_thumbspage/pygadgets-pycalc-hist.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-hist.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-keyboard.jpg.html">
+	<img src="_thumbspage/pygadgets-pycalc-keyboard.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-keyboard.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-y5.5in-1.png.html">
+	<img src="_thumbspage/pygadgets-pycalc-y5.5in-1.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-y5.5in-1.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-y5.5in-cmd.png.html">
+	<img src="_thumbspage/pygadgets-pycalc-y5.5in-cmd.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-y5.5in-cmd.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-y5.5in-help.png.html">
+	<img src="_thumbspage/pygadgets-pycalc-y5.5in-help.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-y5.5in-help.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-y5.5in-hist.png.html">
+	<img src="_thumbspage/pygadgets-pycalc-y5.5in-hist.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-y5.5in-hist.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-y5.5in-more.png.html">
+	<img src="_thumbspage/pygadgets-pycalc-y5.5in-more.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-y5.5in-more.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pycalc-zbuttons-stuck.png.html">
+	<img src="_thumbspage/pygadgets-pycalc-zbuttons-stuck.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pycalc-zbuttons-stuck.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pyclock-1.png.html">
+	<img src="_thumbspage/pygadgets-pyclock-1.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pyclock-1.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pyclock-2.png.html">
+	<img src="_thumbspage/pygadgets-pyclock-2.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pyclock-2.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pyphoto-1.png.html">
+	<img src="_thumbspage/pygadgets-pyphoto-1.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pyphoto-1.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pyphoto-2.png.html">
+	<img src="_thumbspage/pygadgets-pyphoto-2.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pyphoto-2.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pyphoto-3.png.html">
+	<img src="_thumbspage/pygadgets-pyphoto-3.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pyphoto-3.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pyphoto-4.png.html">
+	<img src="_thumbspage/pygadgets-pyphoto-4.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pyphoto-4.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pyphoto-kbrd.jpg.html">
+	<img src="_thumbspage/pygadgets-pyphoto-kbrd.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pyphoto-kbrd.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pytoe-2.jpg.html">
+	<img src="_thumbspage/pygadgets-pytoe-2.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pytoe-2.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pytoe-init-fail.png.html">
+	<img src="_thumbspage/pygadgets-pytoe-init-fail.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pytoe-init-fail.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pygadgets-pytoe-postimport1line.png.html">
+	<img src="_thumbspage/pygadgets-pytoe-postimport1line.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pygadgets-pytoe-postimport1line.png</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pymailgui-1.jpg.html">
+	<img src="_thumbspage/pymailgui-1.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pymailgui-1.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pymailgui-2.jpg.html">
+	<img src="_thumbspage/pymailgui-2.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pymailgui-2.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pymailgui-3.jpg.html">
+	<img src="_thumbspage/pymailgui-3.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pymailgui-3.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/pymailgui-terminal-guis-fail.png.html">
+	<img src="_thumbspage/pymailgui-terminal-guis-fail.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">pymailgui-terminal-guis-fail.png</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/rotated-help-misplaces-gui.jpg.html">
+	<img src="_thumbspage/rotated-help-misplaces-gui.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">rotated-help-misplaces-gui.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/save-changed-files.png.html">
+	<img src="_thumbspage/save-changed-files.png" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">save-changed-files.png</p></td>
+</tr>
+</table></div></p>
+
+
+<!-- ======================================================================= -->
+<!-- END THUMBS TABLE -->
+<!-- ======================================================================= -->
+
+
+<!-- Generated 2020-09-15 @15:43:19, by thumbspage 2.0: learning-python.com/thumbspage.html -->
+
+
+<!-- ======================================================================= -->
+<!-- START DEFAULT FOOTER -->
+<!-- ======================================================================= -->
+
+
+<p style="margin-bottom: 80px;"><i>This page was generated by <A HREF="https://learning-python.com/thumbspage.html">thumbspage.py</A></i></p>
+</body></html>

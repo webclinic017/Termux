@@ -1,0 +1,11 @@
+# startarch
+
+# Welcome to Arch Linux in Termux!
+Install a package: pacman -S package
+More  information: pacman -[D|F|Q|R|S|T|U]h
+Search   packages: pacman -Ss query
+Upgrade  packages: pacman -Syu
+                                                      Chat:  https://wiki.termux.com/wiki/Community
+Forum: https://archlinuxarm.org/forum
+Help: info query and man query
+IRC: wiki.archlinux.org/index.php/IRC_channel

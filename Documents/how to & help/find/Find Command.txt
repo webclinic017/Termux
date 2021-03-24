@@ -1,0 +1,415 @@
+#								Find Command
+
+#				Part I – Basic Find Commands for Finding Files with Names
+
+#						Find Files Using Name in Current Directory
+
+# Find all the files whose name is tecmint.txt in a current working directory.
+
+find . -name tecmint.txt ./tecmint.txt
+
+#					Find Files Under Home Directory
+
+#		Find all the files under /home directory with name tecmint.txt.
+
+find /home -name tecmint.txt /home/tecmint.txt
+
+#					Find Files Using Name and Ignoring Case
+
+#		Find all the files whose name is tecmint.txt and contains both capital and small letters in /home directory.
+
+find /home -iname tecmint.txt ./tecmint.txt ./Tecmint.txt
+
+#						Find Directories Using Name
+
+#		Find all directories whose name is Tecmint in / directory.
+
+find / -type d -name Tecmint /Tecmint
+
+#						Find PHP Files Using Name
+
+#		Find all php files whose name is tecmint.php in a current working directory.
+
+find . -type f -name tecmint.php ./tecmint.php
+
+#		Find all php files in a directory.
+
+find . -type f -name "*.php" ./tecmint.php ./login.php ./index.php
+
+#				Part II – Find Files Based on their Permissions
+
+#		Find all the files whose permissions are 777.
+
+find . -type f -perm 0777 -print
+
+#		Find all the files without permission 777.
+
+find / -type f ! -perm 777
+
+#						Find SGID Files with 644 Permissions
+
+#		Find all the SGID bit files whose permissions set to 644.
+
+find / -perm 2644
+
+#		Find all the Sticky Bit set files whose permission are 551.
+
+find / -perm 1551
+
+#		Find all SUID set files.
+
+find / -perm /u=s
+
+#		Find all SGID set files.
+
+find / -perm /g=s
+
+#		Find all Read Only files.
+
+find / -perm /u=r
+
+#		Find all Executable files.
+
+find / -perm /a=x
+
+#		Find all 777 permission files and use chmod command to set permissions to 644.
+
+find / -type f -perm 0777 -print -exec chmod 644 {} \;
+
+#		Find all 777 permission directories and use chmod command to set permissions to 755.
+
+find / -type d -perm 777 -print -exec chmod 755 {} \;
+
+#		To find a single file called tecmint.txt and remove it.
+
+find . -type f -name "tecmint.txt" -exec rm -f {} \;
+
+#		To find and remove multiple files such as .mp3 or .txt, then use.
+
+find . -type f -name "*.txt" -exec rm -f {} \; OR find . -type f -name "*.mp3" -exec rm -f {} \;
+
+#		To find all empty files under a certain path.
+
+find /tmp -type f -empty
+
+#		To file all empty directories under a certain path.
+
+find /tmp -type d -empty
+
+#		To find all hidden files, use the below command.
+
+find /tmp -type f -name ".*"
+
+#				Part III – Search Files Based On Owners and Groups
+
+#		To find all or single file called tecmint.txt under / root directory of owner root.
+
+find / -user root -name tecmint.txt
+
+#		To find all files that belong to user Tecmint under /home directory.
+
+find /home -user tecmint
+
+#		To find all files that belong to the group Developer under /home directory.
+
+#		find /home -group developer
+
+#		To find all .txt files of user Tecmint under /home directory.
+
+find /home -user tecmint -iname "*.txt"
+
+#				Part IV – Find Files and Directories Based on Date and Time
+
+#		To find all the files which are modified 50 days back.
+
+find / -mtime 50
+
+#		To find all the files which are accessed 50 days back.
+
+find / -atime 50
+
+#		To find all the files which are modified more than 50 days back and less than 100 days.
+
+find / -mtime +50 –mtime -100
+
+#		To find all the files which are changed in the last 1 hour.
+
+find / -cmin -60
+
+#		To find all the files which are modified in the last 1 hour.
+
+find / -mmin -60
+
+#		To find all the files which are accessed in the last 1 hour.
+
+find / -amin -60
+
+#		To find all 50MB files, use.
+
+find / -size 50M
+
+# Find Size between 50MB – 100MB
+
+#		To find all the files which are greater than 50MB and less than 100MB.
+
+find / -size +50M -size -100M
+
+#		To find all 100MB files and delete them using one single command.
+
+find / -type f -size +100M -exec rm -f {} \;
+
+#		Find all .mp3 files with more than 10MB and delete them using one single command.
+
+find / -type f -name *.mp3 -size +10M -exec rm {} \;
+
+#						Remove Files
+
+find . -depth -type f -name "*.txt" -exec rm -rf {} \;
+
+#						Rename Files
+
+find . -depth -type f | while read FNAME; do mv "$FNAME" "${FNAME//Old/New}"; done
+
+#						Rename Folders
+
+find . -depth -type d | while read FNAME; do echo "$FNAME" "${FNAME//Old/New}"; done
+
+find . -depth -type d -name ".git" -exec rm -rf {} \;
+
+find . -depth -type d -exec rm -rf {} \; 2>/dev/null
+
+find . -type d -empty -delete
+
+find . -type d -exec bash -c 'shopt -s nullglob; shopt -s dotglob; files=("$1"/*); [[ ${files[@]} ]] | rm -rf -v "$1"' -- {} \;
+
+#						Remove Folders
+
+find . -depth -type f -name ".git" -exec rm -rf {} \;
+
+#		Find all the files whose name is some-file.txt in a current working directory.
+
+find . -name some-file.txt ./some-file.txt
+
+#		Find all the files under /home directory with name some-file.txt.
+
+find /home -name some-file.txt /home/some-file.txt
+
+#		Find all the files whose name is some-file.txtsome-file.txt and contains both capital and small letters in /home directory.
+
+find /home -iname some-file.txt ./some-file.txt ./Some-file.txt
+
+#		Find all directories whose name is some-file in / directory.
+
+find / -type d -name Some-file /Some-file
+
+#		Find all php files whose name is some-file.php in a current working directory.
+
+find . -type f -name some-file.php ./some-file.php
+
+#		Find all php files in a directory.
+
+find . -type f -name "*.php" ./some-file.php ./login.php ./index.php
+
+#		Find all the files whose permissions are 777.
+
+find . -type f -perm 0777 -print
+
+find / -type f ! -perm 777
+
+#		Find all the SGID bit files whose permissions set to 644.
+
+find / -perm 2644
+
+#		Find all the Sticky Bit set files whose permission are 551.
+
+find / -perm 1551
+
+#		Find all SUID set files.
+
+find / -perm /u=s
+
+#		Find all SGID set files.
+
+find / -perm /g=s
+
+#		Find all Read Only files.
+
+find / -perm /u=r
+
+#		Find all Executable files.
+
+find / -perm /a=x
+
+#		Find all 777 permission files and use chmod command to set permissions to 644.
+
+find / -type f -perm 0777 -print -exec chmod 644 {} \;
+
+#		Find all 777 permission directories and use chmod command to set permissions to 755.
+
+find / -type d -perm 777 -print -exec chmod 755 {} \;
+
+#		To find a single file called some-file.txt and remove it.
+
+find . -type f -name "some-file.txt" -exec rm -f {} \;
+
+#		To find and remove multiple files such as .mp3 or .txt, then use.
+
+find . -type f -name "*.txt" -exec rm -f {} \; OR find . -type f -name "*.mp3" -exec rm -f {} \;
+
+#		To find all empty files under a certain path.
+
+find /tmp -type f -empty
+
+#		To file all empty directories under a certain path.
+
+find /tmp -type d -empty
+
+#		To find all hidden files, use the below command.
+
+find /tmp -type f -name ".*"
+
+#		To find all or single file called some-file.txt under / root directory of owner root.
+
+find / -user root -name some-file.txt
+
+#		To find all files that belong to user Some-file under /home directory.
+
+find /home -user some-file
+
+#		To find all files that belong to the group Developer under /home directory.
+
+find /home -group developer
+
+#		To find all .txt files of user Some-file under /home directory.
+
+find /home -user some-file -iname "*.txt"
+
+#		To find all the files which are modified 50 days back.
+
+find / -mtime 50
+
+#		To find all the files which are accessed 50 days back.
+
+find / -atime 50
+
+#		To find all the files which are modified more than 50 days back and less than 100 days.
+
+find / -mtime +50 –mtime -100
+
+#		To find all the files which are changed in the last 1 hour.
+
+find / -cmin -60
+
+#		To find all the files which are modified in the last 1 hour.
+
+find / -mmin -60
+
+#		To find all the files which are accessed in the last 1 hour.
+
+find / -amin -60
+
+#		To find all 50MB files, use.
+
+find / -size 50M
+
+#		To find all the files which are greater than 50MB and less than 100MB.
+
+find / -size +50M -size -100M
+
+#		To find all 100MB files and delete them using one single command.
+
+find / -type f -size +100M -exec rm -f {} \;
+
+#		Find all .mp3 files with more than 10MB and delete them using one single command.
+
+find / -type f -name *.mp3 -size +10M -exec rm {} \;
+
+#   <-- Find Commands -->
+
+# Find 50MB Files
+
+alias find50='find / -size 50M'
+
+# Find Size between 50MB � 100MB
+
+alias find50-100='find / -size +50M -size -100M'
+
+# Find and Delete 100MB Files
+
+alias rm100='find / -type f -size +100M -exec rm -rf {} \;'
+
+# Rename .git folders
+
+alias dot='find . -maxdepth 10 -type d | while read FNAME; do mv "$FNAME" "${FNAME//.git/DOTgit}"; done'
+
+alias undot='find . -maxdepth 10 -type d | while read FNAME; do mv "$FNAME" "${FNAME//DOTgit/.git}"; done'
+
+# Find empty directories
+
+alias emptyd='find . -type d -empty'
+
+# Find empty sized files
+
+alias find0='find . -type f -empty'
+
+# For removing 0 sized files, we can't de-dupe them automatically since they are technically all the same, so they are typically left beind. this removes them if needed.
+
+alias find0rm='find-0 -exec rm -rf {} +'
+
+alias find0rm1='find -0 -print0 | xargs -0 rm -rf'
+
+alias find0rm2='find -0 -delete'
+
+# Delete all empty directories
+
+alias findemptyrm='while [ -n "$(find . -depth -type d -empty -print -exec rm -rf {} +)" ]; do :; done'
+
+alias findemptyrm1='find . -depth -type d -exec rm -rf {} \; 2>/dev/null'
+
+alias findemptyrm2='find -empty -delete'
+
+# Delete empty directories when `-delete` option is not available. output null character (instead of newline) as separator. used together with `xargs -0`, will handle filenames with spaces and special chars.
+
+alias find-empty-rm3='find-empty -print0 | xargs -0 rmdir -p'
+
+# Alternative version using `-exec` with `+`, similar to xargs. {}: path of current file +: {} is replaced with as many pathnames as possible for each invocation.
+
+alias find-empty-delete4='find -empty -exec rmdir -p {} +'
+
+# Find all the files whose permissions are 777.
+
+alias f777='find . -type f -perm 0777 -print'
+
+alias f777-1='find / -type f ! -perm 777'
+
+# Find all the SGID bit files whose permissions set to 644.
+
+alias sgid644='find / -perm 2644'
+
+# Find all the Sticky Bit set files whose permission are 551.
+
+alias stickybit551='find / -perm 1551'
+
+# Find all SUID set files.
+
+alias fsuid='find / -perm /u=s'
+
+# Find all SGID set files.
+
+alias fsgid='find / -perm /g=s'
+
+# Find all Read Only files.
+
+alias readonly='find / -perm /u=r'
+
+# Find all Executable files.
+
+alias findexe='find / -perm /a=x'
+
+# Find all 777 permission files and use chmod command to set permissions to 644.
+
+alias 777chmod644='find / -type f -perm 0777 -print -exec chmod 644 {} \;'
+
+# Find all 777 permission directories and use chmod command to set permissions to 755.
+
+alias 777chmod755='find / -type d -perm 777 -print -exec chmod 755 {} \;'

@@ -1,0 +1,9 @@
+# Site settings
+title: Termux
+description: > # this means to ignore newlines until "baseurl:"
+  Help page for Termux - terminal emulator and Linux environment for Android.
+baseurl: ""
+url: "https://termux.com"
+
+# Build settings
+markdown: kramdown

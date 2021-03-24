@@ -1,0 +1,146 @@
+Bypassing NAT - Termux Wiki
+IPv4 address space is limited and therefore to connect many devices to the Internet a special mechanisms are being used. Internet service providers usually share same IP address between several people. WiFi routers are also share single external IP address between multiple connected devices. This is implemented through NAT, depending on your network setup it can be local or carrier-grade.
+
+Your device is not accessible from the Internet by default, if behind NAT. If you are under carrier-grade NAT or can't modify router settings (port forwarding), read below for the solutions how to make your device accessible from the Internet.
+
+You do not need this if you have subscribed to mobile carrier's static IP service or were able to setup port forwarding in your WiFi router settings.
+
+Tor
+
+Accessing device via Tor is the most secure and effective method - offers strong end-to-end encryption (onion services don't use 'exit' node), virtual ports (e.g. 80 port without root), your service won't be visible on plain Internet.
+
+However, this method requires setting up a Tor Onion Service.
+
+Installing needed packages
+
+The main package is tor. Install it by running this command:
+
+pkg install tor
+
+You may want to install a `proxychains-ng` for accessing the Tor Network:
+
+pkg install proxychains-ng
+
+Package `torsocks` may not work since Android 8.
+
+Setting up Onion Service
+
+You will have to modify the default configuration file of tor ($PREFIX/etc/tor/torrc). Here is an example of configuring SSH Onion Service, overwrite the torrc file with this content:
+
+## Enable TOR SOCKS proxy SOCKSPort 127.0.0.1:9050 ## Hidden Service: SSH HiddenServiceDir /data/data/com.termux/files/home/.tor/hidden_ssh HiddenServicePort 22 127.0.0.1:8022
+
+Then you need to make a directory where information about Hidden Service will be stored:
+
+mkdir -p ~/.tor/hidden_ssh
+
+Now you can execute in console tor. If start was successfull, you can get your onion service hostname:
+
+cat ~/.tor/hidden_ssh/hostname
+
+Output should be like this: g3yv3tvqrbow7koz.onion
+
+Accessing your service
+
+First of all make sure that on client device `tor` is running and you have all necessary software for accessing Tor Network (in this case package `proxychains-ng`).
+
+To access the onion service created in previous step, run this:
+
+proxychains4 ssh g3yv3tvqrbow7koz.onion
+
+If everything is ok, the output should be like this:
+
+The authenticity of host 'g3yv3tvqrbow7koz.onion (127.42.42.0)' can't be established. ED25519 key fingerprint is SHA256:WGualHEq7SJdvVeXgy8a+btPQCd7uxTeXjlWdHHLwLc. Are you sure you want to continue connecting (yes/no)?
+
+Remember, `tor` should be running on both (client/server) sides, otherwise you will get connection errors. You can configure other servers (e.g. Nginx) in the same way as shown in above example for SSH.
+
+Learn more about Onion Services
+
+Better explanation about Onion Services and other Tor-related things you can found at torproject.org.
+
+Ngrok
+
+Homepage: https://ngrok.com/
+
+Terms of service: https://ngrok.com/tos
+
+Pricing: https://ngrok.com/pricing
+
+Free tier: 40 connections per minute, 4 tunnels max.
+
+Termux developers are not responsible about availability, reliability and safety of this service !
+
+Installation
+
+Go to the Ngrok downloads page, and choose a binary with architecture correct for your device. You can follow instructions available on the downloads page, but for better experience you can follow these instructions that will install binary to the Termux environment.
+
+In these instructions will be assumed, that yours architecture is AArch64 (i.e. arm64).
+
+1. Unzip downloaded archive:
+
+unzip ngrok-stable-linux-arm64.zip
+
+2. Move binary to the right place:
+
+mv ngrok $PREFIX/bin/
+
+3. Set executable permissions:
+
+chmod +x $PREFIX/bin/ngrok
+
+4. Latest Ngrok may not work in Termux directly as requires /etc/resolv.conf. Installing necessary packages that we will need:
+
+pkg install proot resolv-conf
+
+5. Starting proot. You will need to do this every time you want to use Ngrok:
+
+termux-chroot
+
+6. You need to authorize your ngrok installation. Here will be assumed that you registered an account on https://ngrok.com/signup so you can proceed with:
+
+ngrok authtoken {your auth token}
+
+Note that authentication token should be retrieved from your account's page. The token is similar to this string: ABCDEFGHIJKLMNOPQRSTU_VWXYZabcdef1234567890.
+
+Usage example
+
+In this example will be shown how to forward SSH port via Ngrok. Before proceed, make sure that Ngrok is installed and authenticated, otherwise you will get errors.
+
+Type in your console this:
+
+ngrok tcp 8022
+
+You should see an output similar to this:
+
+ngrok by @inconshreveable (Ctrl+C to quit) Session Status online Account XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX (Plan: Free) Version 2.2.8 Region United States (us) Web Interface http://127.0.0.1:4040 Forwarding tcp://0.tcp.ngrok.io:13766 -> localhost:8022 Connections ttl opn rt1 rt5 p50 p90 0 0 0.00 0.00 0.00 0.00
+
+Here, a string tcp://0.tcp.ngrok.io:13766 represents an URL of your service (in this case SSH) available on the Internet.
+
+You can verify if it works by doing:
+
+ssh -p 13766 0.tcp.ngrok.io
+
+Tmate
+
+Tmate is utility for sharing terminals. It is very easy to use, though it will destroy connection once client disconnected.
+
+Utility can be installed with pkg install tmate.
+
+Usage example
+
+1. Make sure that all your devices have SSH key in ~/.ssh directory. If not, on each device do:
+
+pkg install openssh mkdir ~/.ssh ssh-keygen -t rsa -f ~/.ssh/id_rsa
+
+2. Execute the following command within Termux:
+
+tmate
+
+3. Once you done previous step, you should see a colored line at the screen bottom with link. Save it, because it is your connection token. It looks like
+
+Bff5fhJquRpO105c3OL62Icfp@fk2.tmate.io
+
+4. On another device from which you want to connect to Termux, run
+
+ssh Bff5fhJquRpO105c3OL62Icfp@fk2.tmate.io
+
+Important note: link shown above is just example and should not be copy-pasted !

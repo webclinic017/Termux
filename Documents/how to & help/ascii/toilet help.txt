@@ -1,0 +1,39 @@
+#			toilet help
+
+  -f, --font <name>        select the font
+
+  -d, --directory <dir>    specify font directory
+
+  -s, -S, -k, -W, -o       render mode (default, force smushing,
+
+                           kerning, full width, overlap)
+  -w, --width <width>      set output width
+
+  -t, --termwidth          adapt to terminal's width
+
+  -F, --filter <filters>   apply one or several filters to the text
+
+  -F, --filter list        list available filters
+      --gay                rainbow filter (same as -F gay)
+
+      --metal              metal filter (same as -F metal)
+
+  -E, --export <format>    select export format
+
+  -E, --export list        list available export formats
+
+      --irc                output IRC colour codes (same as -E irc)
+
+      --html               output an HTML document (same as -E html)
+
+  -h, --help               display this help and exit
+
+  -I, --infocode <code>    print FIGlet-compatible infocode
+
+  -v, --version            output version information and exit
+
+# Usage: toilet [ -hkostvSW ] [ -d fontdirectory ]
+
+              [ -f fontfile ] [ -F filter ] [ -w outputwidth ]
+
+              [ -I infocode ] [ -E format ] [ message ]

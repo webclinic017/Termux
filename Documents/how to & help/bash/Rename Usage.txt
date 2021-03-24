@@ -1,0 +1,25 @@
+# rename
+
+# Usage:
+
+ rename [options] <expression> <replacement> <file>...
+
+# Rename files.
+
+# Options:
+
+ -v, --verbose       explain what is being done
+
+ -s, --symlink       act on the target of symlinks
+
+ -n, --no-act        do not make any changes
+
+ -o, --no-overwrite  don't overwrite existing files
+
+ -i, --interactive   prompt before overwrite
+
+ -h, --help          display this help
+
+ -V, --version       display version
+
+# For more details see rename(1).

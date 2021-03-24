@@ -1,0 +1,13 @@
+Usage: myserver [command]... [arguments]...
+
+ Commands:
+ -s <hostname> <port> <path>            to start default localhost server.
+ -s -ng <hostname> <port> <path>        to start php localhost server.
+ -s -php <hostname> <port> <path>       to start php localhost server.
+ -s -py <hostname> <port> <path>        to start python localhost server.
+ -h <hostname> <localhost_port> <port>  to access localhost server on internet.
+ -db [start/stop]                       to start/stop MySQL database server.
+ -s apache                              to start apache web server.
+ update                                 update MyServer.
+ rm -t                                  uninstall MyServer.
+ start                                  start MyServer menu.

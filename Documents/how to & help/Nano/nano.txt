@@ -1,0 +1,42 @@
+Usage: nano [OPTIONS] [[+LINE,COLUMN] FILE]...
+
+Option		GNU long option		Meaning
+ -h, -?		--help			Show this message
+ +LINE,COLUMN				Start at line LINE, column COLUMN
+ -A		--smarthome		Enable smart home key
+ -B		--backup		Save backups of existing files
+ -C <dir>	--backupdir=<dir>	Directory for saving unique backup files
+ -D		--boldtext		Use bold instead of reverse video text
+ -E		--tabstospaces		Convert typed tabs to spaces
+ -F		--multibuffer		Enable multiple file buffers
+ -H		--historylog		Log & read search/replace string history
+ -I		--ignorercfiles		Don't look at nanorc files
+ -K		--rebindkeypad		Fix numeric keypad key confusion problem
+ -L		--nonewlines		Don't add newlines to the ends of files
+ -N		--noconvert		Don't convert files from DOS/Mac format
+ -O		--morespace		Use one more line for editing
+ -Q <str>	--quotestr=<str>	Quoting string
+ -R		--restricted		Restricted mode
+ -S		--smooth		Smooth scrolling
+ -T <#cols>	--tabsize=<#cols>	Set width of a tab to #cols columns
+ -U		--quickblank		Do quick statusbar blanking
+ -V		--version		Print version information and exit
+ -W		--wordbounds		Detect word boundaries more accurately
+ -Y <str>	--syntax=<str>		Syntax definition to use for coloring
+ -c		--const			Constantly show cursor position
+ -d		--rebinddelete		Fix Backspace/Delete confusion problem
+ -i		--autoindent		Automatically indent new lines
+ -k		--cut			Cut from cursor to end of line
+ -l		--nofollow		Don't follow symbolic links, overwrite
+ -m		--mouse			Enable the use of the mouse
+ -o <dir>	--operatingdir=<dir>	Set operating directory
+ -p		--preserve		Preserve XON (^Q) and XOFF (^S) keys
+ -r <#cols>	--fill=<#cols>		Set wrapping point at column #cols
+ -s <prog>	--speller=<prog>	Enable alternate speller
+ -t		--tempfile		Auto save on exit, don't prompt
+ -v		--view			View mode (read-only)
+ -w		--nowrap		Don't wrap long lines
+ -x		--nohelp		Don't show the two help lines
+ -z		--suspend		Enable suspension
+ -a, -b, -e,				
+ -f, -g, -j				(ignored, for Pico compatibility)

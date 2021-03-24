@@ -1,0 +1,150 @@
+########################################################################################### GitHub Bash Cheat Sheet ######################
+#####################################################################
+Bash is the GNU Project's shell. Bash is the Bourne Again SHell. Bash is an sh-compatible shell that incorporates useful features from the Korn shell (ksh) and C shell (csh). It is intended to conform to the IEEE POSIX P1003.2/ISO 9945.2 Shell and Tools standard. It offers functional improvements over sh for both programming and interactive use. In addition, most sh scripts can be run by Bash without modification.
+
+################################################################################################ Install Bash ############################
+#####################################################################
+
+Bash is typically a native application on Linux/Unix based machines; however, if installation is necessary you can find links to downloads below.
+
+############################################################################################## Bash for Windows ##########################
+#####################################################################
+Because bash isn't native to Windows an application like Cygwin would be necessary to
+gain the same features readily available in linux/macOS.  
+https://www.cygwin.com
+
+################### Bash for macOS and linux ########################
+Bash is natively installed on Linux/Unix based machines.
+
+########################## Configure shell ##########################
+Configuring bash aliases
+
+Sets the ls command to list, colorize, and provide file size suffixes
+$ alias ls='ls -lGh'
+
+#################### Working with directories #######################
+###### Navigate, create, and delete directory folders and files #####
+
+Display path of current working directory
+$ pwd
+
+Change working directory to [directory]
+$ cd [directory]
+
+Navigate to the parent directory
+$ cd ..
+
+List directory contents
+$ ls
+
+List detailed directory contents, including hidden files
+$ ls -la
+
+Create a new directory named [directory]
+$ mkdir [directory]
+
+####################### Handling output #############################
+############ Control the flow of data from a file ###################
+
+Output the contents of [file]
+$ cat [file]
+
+Output the contents of [file] which supports pagination
+$ less [file]
+
+Output the first 10 lines of [file]
+$ head [file]
+
+Direct the output of [cmd] into [file]
+$ [cmd] > [file]
+
+Append the output of [cmd] to [file]
+$ [cmd] >> [file]
+
+Direct the output of [cmd1] to the input of [cmd2]
+$ [cmd1] | [cmd2]
+
+Clear the bash window
+$ clear
+
+####################### Working with files ##########################
+######## Moving, renaming, creating and deleting files ##############
+
+Delete [file]
+$ rm [file]
+
+Delete [directory]
+$ rm -r [directory]
+
+Force-delete [file] (add -r to force-delete a directory)
+$ rm -f [file]
+
+Rename [file-old] to [file-new]
+$ mv [file-old] [file-new]
+
+Copy [file] to [directory] (possibly overwriting an existing file)
+$ cp [file] [directory]
+
+Copy [src-directory] and it's contents to [dest-directory] (possibly overwriting files in an existing directory)
+$ cp -r [src-directory] [dest-directory]
+
+Update file access and modification time (and create [file] if it does not exist)
+$ touch [file]
+
+################## File and folder permissions ######################
+# Change read, write, and execute permissions on files and folders ##
+
+Change permissions of [file] to 755
+$ chmod 755 [file]
+
+> Octal representation of permissions are group of permissions for User (u), Group (g) and Others (o) with values that are sum of read (4), write (2) and execute (1) permissions. For example, 755 is:
+> - Owner = 7; read (4) + write (2) + execute (1)
+> - Group = 5; read (4) + execute (1)
+> - Others = 5; read (4) + execute (1)
+
+Change permissions of [directory] (and its contents to 600)
+$ chmod -R 600
+
+Change ownership of [tile] to [user] and [group] (add -R to include a directory's contents)
+$ chown [user]:[group] [file]
+
+##################### Networking and Internet #######################
+
+Ping the [ip/host] and displays time, among other things
+$ ping [ip/host]
+
+Downloads [url] to current working directory
+$ curl -O [url]
+
+Starts an SSH connection to [host] using [user]
+$ ssh [user]@[ip/host]
+
+Adds your SSH key to the host file for [user] to enable a keyed or passwordless login
+$ ssh-copy-id [user]@[host]
+
+Securely copies [file] to a remote [host]
+$ scp [file] [user]@[ip/host]:/path/to/file
+
+Downloads [file] to your current working directory
+$ wget [file]
+
+########################### System Tasks ############################
+#Find important information related to your currently running system#
+
+List currently running processes
+$ ps ax
+
+Displays live information on your currently running processes
+$ top
+
+Ends the process using the provided process ID [pid]
+$ kill [pid]
+
+Ends all processes with the given [processname]
+$ killall [processname]
+
+Shows disk usage
+$ df
+
+Shows disk usage of all files and folders in [filename]
+$ du [filename]

@@ -1,0 +1,24 @@
+mpv 0.32.0
+
+ffmpeg library versions:
+   libavutil       56.51.100
+   libavcodec      58.91.100
+   libavformat     58.45.100
+   libswscale      5.7.100
+   libavfilter     7.85.100
+   libswresample   3.7.100
+ffmpeg version: 4.3.1
+
+Usage:   mpv [options] [url|path/]filename
+
+Basic options:
+ --start=<time>    seek to given (percent, seconds, or hh:mm:ss) position
+ --no-audio        do not play sound
+ --no-video        do not play video
+ --fs              fullscreen playback
+ --sub-file=<file> specify subtitle file to use
+ --playlist=<file> specify playlist file
+
+ --list-options    list all mpv options
+ --h=<string>      print options which contain the given string in their name
+

@@ -1,0 +1,5 @@
+*           text=auto
+*.bat       eol=crlf
+*.gradle    eol=lf
+*.mk        eol=lf
+*.sh        eol=lf

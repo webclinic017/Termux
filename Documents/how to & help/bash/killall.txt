@@ -1,0 +1,34 @@
+Usage: killall [OPTION]... [--] NAME...
+       killall -l, --list
+       killall -V, --version
+
+  -e,--exact          require exact match for very long names
+
+  -I,--ignore-case    case insensitive process name match
+
+  -g,--process-group  kill process group instead of process
+
+  -y,--younger-than   kill processes younger than TIME
+
+  -o,--older-than     kill processes older than TIME
+
+  -i,--interactive    ask for confirmation before killing
+
+  -l,--list           list all known signal names
+
+  -q,--quiet          don't print complaints
+
+  -r,--regexp         interpret NAME as an extended regular expression
+
+  -s,--signal SIGNAL  send this signal instead of SIGTERM
+
+  -u,--user USER      kill only process(es) running as USER
+
+  -v,--verbose        report if the signal was successfully sent
+
+  -V,--version        display version information
+
+  -w,--wait           wait for processes to die
+
+  -n,--ns PID         match processes that belong to the same namespaces
+                      as PID

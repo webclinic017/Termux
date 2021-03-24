@@ -1,0 +1,11 @@
+future
+requests
+paramiko
+pysnmp
+pycryptodome
+
+[tests]
+pytest
+pytest-forked
+pytest-xdist
+flake8

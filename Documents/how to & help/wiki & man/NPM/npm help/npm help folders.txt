@@ -1,0 +1,224 @@
+FOLDERS(5)                                                          FOLDERS(5)
+
+
+
+NNAAMMEE
+       ffoollddeerrss - Folder Structures Used by npm
+
+   DDeessccrriippttiioonn
+       npm puts various things on your computer.  That's its job.
+
+       This document will tell you what it puts where.
+
+   ttll;;ddrr
+
+       +o Local install (default): puts stuff in ..//nnooddee__mmoodduulleess of the current
+         package root.
+
+       +o Global install (with --gg): puts stuff in /usr/local or wherever node
+         is installed.
+
+       +o Install it llooccaallllyy if you're going to rreeqquuiirree(()) it.
+
+       +o Install it gglloobbaallllyy if you're going to run it on the command line.
+
+       +o If you need both, then install it in both places, or use nnppmm lliinnkk.
+
+
+   pprreeffiixx CCoonnffiigguurraattiioonn
+       The pprreeffiixx config defaults to the location where node is installed.  On
+       most systems, this is //uussrr//llooccaall. On Windows, it's %%AAppppDDaattaa%%\\nnppmm.  On
+       Unix systems, it's one level up, since node is typically installed at
+       {{pprreeffiixx}}//bbiinn//nnooddee rather than {{pprreeffiixx}}//nnooddee..eexxee.
+
+       When the gglloobbaall flag is set, npm installs things into this prefix.
+       When it is not set, it uses the root of the current package, or the
+       current working directory if not in a package already.
+
+   NNooddee MMoodduulleess
+       Packages are dropped into the nnooddee__mmoodduulleess folder under the pprreeffiixx.
+       When installing locally, this means that you can rreeqquuiirree((""ppaacckkaaggeennaammee""))
+       to load its main module, or
+       rreeqquuiirree((""ppaacckkaaggeennaammee//lliibb//ppaatthh//ttoo//ssuubb//mmoodduullee"")) to load other modules.
+
+       Global installs on Unix systems go to {{pprreeffiixx}}//lliibb//nnooddee__mmoodduulleess.
+       Global installs on Windows go to {{pprreeffiixx}}//nnooddee__mmoodduulleess (that is, no lliibb
+       folder.)
+
+       Scoped packages are installed the same way, except they are grouped
+       together in a sub-folder of the relevant nnooddee__mmoodduulleess folder with the
+       name of that scope prefix by the @ symbol, e.g. nnppmm iinnssttaallll
+       @@mmyyoorrgg//ppaacckkaaggee would place the package in
+       {{pprreeffiixx}}//nnooddee__mmoodduulleess//@@mmyyoorrgg//ppaacckkaaggee. See npm help ssccooppee for more
+       details.
+
+       If you wish to rreeqquuiirree(()) a package, then install it locally.
+
+   EExxeeccuuttaabblleess
+       When in global mode, executables are linked into {{pprreeffiixx}}//bbiinn on Unix,
+       or directly into {{pprreeffiixx}} on Windows.
+
+       When in local mode, executables are linked into ..//nnooddee__mmoodduulleess//..bbiinn so
+       that they can be made available to scripts run through npm.  (For
+       example, so that a test runner will be in the path when you run nnppmm
+       tteesstt.)
+
+   MMaann PPaaggeess
+       When in global mode, man pages are linked into {{pprreeffiixx}}//sshhaarree//mmaann.
+
+       When in local mode, man pages are not installed.
+
+       Man pages are not installed on Windows systems.
+
+   CCaacchhee
+       See npm help ccaacchhee.  Cache files are stored in ~~//..nnppmm on Posix, or
+       %%AAppppDDaattaa%%//nnppmm--ccaacchhee on Windows.
+
+       This is controlled by the ccaacchhee configuration param.
+
+   TTeemmpp FFiilleess
+       Temporary files are stored by default in the folder specified by the
+       ttmmpp config, which defaults to the TMPDIR, TMP, or TEMP environment
+       variables, or //ttmmpp on Unix and cc::\\wwiinnddoowwss\\tteemmpp on Windows.
+
+       Temp files are given a unique folder under this root for each run of
+       the program, and are deleted upon successful exit.
+
+   MMoorree IInnffoorrmmaattiioonn
+       When installing locally, npm first tries to find an appropriate pprreeffiixx
+       folder.  This is so that nnppmm iinnssttaallll ffoooo@@11..22..33 will install to the
+       sensible root of your package, even if you happen to have ccdded into
+       some other folder.
+
+       Starting at the $PWD, npm will walk up the folder tree checking for a
+       folder that contains either a ppaacckkaaggee..jjssoonn file, or a nnooddee__mmoodduulleess
+       folder.  If such a thing is found, then that is treated as the
+       effective "current directory" for the purpose of running npm commands.
+       (This behavior is inspired by and similar to git's .git-folder seeking
+       logic when running git commands in a working dir.)
+
+       If no package root is found, then the current folder is used.
+
+       When you run nnppmm iinnssttaallll ffoooo@@11..22..33, then the package is loaded into the
+       cache, and then unpacked into ..//nnooddee__mmoodduulleess//ffoooo.  Then, any of foo's
+       dependencies are similarly unpacked into
+       ..//nnooddee__mmoodduulleess//ffoooo//nnooddee__mmoodduulleess//.......
+
+       Any bin files are symlinked to ..//nnooddee__mmoodduulleess//..bbiinn//, so that they may
+       be found by npm scripts when necessary.
+
+   GGlloobbaall IInnssttaallllaattiioonn
+       If the gglloobbaall configuration is set to true, then npm will install
+       packages "globally".
+
+       For global installation, packages are installed roughly the same way,
+       but using the folders described above.
+
+   CCyycclleess,, CCoonnfflliiccttss,, aanndd FFoollddeerr PPaarrssiimmoonnyy
+       Cycles are handled using the property of node's module system that it
+       walks up the directories looking for nnooddee__mmoodduulleess folders.  So, at
+       every stage, if a package is already installed in an ancestor
+       nnooddee__mmoodduulleess folder, then it is not installed at the current location.
+
+       Consider the case above, where ffoooo -->> bbaarr -->> bbaazz.  Imagine if, in
+       addition to that, baz depended on bar, so you'd have: ffoooo -->> bbaarr -->> bbaazz
+       -->> bbaarr -->> bbaazz .......  However, since the folder structure is:
+       ffoooo//nnooddee__mmoodduulleess//bbaarr//nnooddee__mmoodduulleess//bbaazz, there's no need to put another
+       copy of bar into ......//bbaazz//nnooddee__mmoodduulleess, since when it calls
+       require("bar"), it will get the copy that is installed in
+       ffoooo//nnooddee__mmoodduulleess//bbaarr.
+
+       This shortcut is only used if the exact same version would be installed
+       in multiple nested nnooddee__mmoodduulleess folders.  It is still possible to have
+       aa//nnooddee__mmoodduulleess//bb//nnooddee__mmoodduulleess//aa if the two "a" packages are different
+       versions.  However, without repeating the exact same package multiple
+       times, an infinite regress will always be prevented.
+
+       Another optimization can be made by installing dependencies at the
+       highest level possible, below the localized "target" folder.
+
+   EExxaammppllee
+       Consider this dependency graph:
+
+         foo
+         +-- blerg@1.2.5
+         +-- bar@1.2.3
+         |   +-- blerg@1.x (latest=1.3.7)
+         |   +-- baz@2.x
+         |   |   `-- quux@3.x
+         |   |       `-- bar@1.2.3 (cycle)
+         |   `-- asdf@*
+         `-- baz@1.2.3
+             `-- quux@3.x
+                 `-- bar
+
+       In this case, we might expect a folder structure like this:
+
+         foo
+         +-- node_modules
+             +-- blerg (1.2.5) <---[A]
+             +-- bar (1.2.3) <---[B]
+             |   `-- node_modules
+             |       +-- baz (2.0.2) <---[C]
+             |       |   `-- node_modules
+             |       |       `-- quux (3.2.0)
+             |       `-- asdf (2.3.4)
+             `-- baz (1.2.3) <---[D]
+                 `-- node_modules
+                     `-- quux (3.2.0) <---[E]
+
+       Since foo depends directly on bbaarr@@11..22..33 and bbaazz@@11..22..33, those are
+       installed in foo's nnooddee__mmoodduulleess folder.
+
+       Even though the latest copy of blerg is 1.3.7, foo has a specific
+       dependency on version 1.2.5.  So, that gets installed at [A].  Since
+       the parent installation of blerg satisfies bar's dependency on
+       bblleerrgg@@11..xx, it does not install another copy under [B].
+
+       Bar [B] also has dependencies on baz and asdf, so those are installed
+       in bar's nnooddee__mmoodduulleess folder.  Because it depends on bbaazz@@22..xx, it cannot
+       re-use the bbaazz@@11..22..33 installed in the parent nnooddee__mmoodduulleess folder [D],
+       and must install its own copy [C].
+
+       Underneath bar, the bbaazz -->> qquuuuxx -->> bbaarr dependency creates a cycle.
+       However, because bar is already in quux's ancestry [B], it does not
+       unpack another copy of bar into that folder.
+
+       Underneath ffoooo -->> bbaazz [D], quux's [E] folder tree is empty, because its
+       dependency on bar is satisfied by the parent folder copy installed at
+       [B].
+
+       For a graphical breakdown of what is installed where, use nnppmm llss.
+
+   PPuubblliisshhiinngg
+       Upon publishing, npm will look in the nnooddee__mmoodduulleess folder.  If any of
+       the items there are not in the bbuunnddlleeddDDeeppeennddeenncciieess array, then they
+       will not be included in the package tarball.
+
+       This allows a package maintainer to install all of their dependencies
+       (and dev dependencies) locally, but only re-publish those items that
+       cannot be found elsewhere.  See npm help ppaacckkaaggee..jjssoonn for more
+       information.
+
+   SSeeee aallssoo
+
+       +o npm help package.json
+
+       +o npm help install
+
+       +o npm help pack
+
+       +o npm help cache
+
+       +o npm help config
+
+       +o npm help npmrc
+
+       +o npm help config
+
+       +o npm help publish
+
+
+
+
+                                  August 2020                       FOLDERS(5)

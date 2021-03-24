@@ -1,0 +1,46 @@
+Usage:
+    perlbrew command syntax:
+
+        perlbrew <command> [options] [arguments]
+
+    Commands:
+
+        init           Initialize perlbrew environment.
+        info           Show useful information about the perlbrew installation
+
+        install        Install perl
+        uninstall      Uninstall the given installation
+        available      List perls available to install
+        lib            Manage local::lib directories.
+        alias          Give perl installations a new name
+        upgrade-perl   Upgrade the current perl
+
+        list           List perl installations
+        use            Use the specified perl in current shell
+        off            Turn off perlbrew in current shell
+        switch         Permanently use the specified perl as default
+        switch-off     Permanently turn off perlbrew (revert to system perl)
+        exec           exec programs with specified perl environments.
+        clone-modules  re-installs all CPAN modules from one installation to another
+
+        self-install       Install perlbrew itself under PERLBREW_ROOT/bin
+        self-upgrade       Upgrade perlbrew itself.
+
+        install-patchperl  Install patchperl
+        install-cpanm      Install cpanm, a friendly companion.
+        install-multiple   Install multiple versions and flavors of perl
+
+        download       Download the specified perl distribution tarball.
+        clean          Purge tarballs and build directories
+        version        Display version
+        help           Read more detailed instructions
+
+    Generic command options:
+
+        -q --quiet     Be quiet on informative output message.
+        -v --verbose   Tell me more about it.
+
+    See `perlbrew help` for the full documentation of perlbrew, or
+
+    See `perlbrew help <command>` for detail description of the command.
+

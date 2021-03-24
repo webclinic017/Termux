@@ -1,0 +1,885 @@
+PACKAGE.JSON(5)                                                PACKAGE.JSON(5)
+
+
+
+NNAAMMEE
+       ppaacckkaaggee..jjssoonn - Specifics of npm's package.json handling
+
+   DDeessccrriippttiioonn
+       This document is all you need to know about what's required in your
+       package.json file.  It must be actual JSON, not just a JavaScript
+       object literal.
+
+       A lot of the behavior described in this document is affected by the
+       config settings described in npm help ccoonnffiigg.
+
+   nnaammee
+       If you plan to publish your package, the _m_o_s_t important things in your
+       package.json are the name and version fields as they will be required.
+       The name and version together form an identifier that is assumed to be
+       completely unique.  Changes to the package should come along with
+       changes to the version. If you don't plan to publish your package, the
+       name and version fields are optional.
+
+       The name is what your thing is called.
+
+       Some rules:
+
+       +o The name must be less than or equal to 214 characters. This includes
+         the scope for scoped packages.
+
+       +o The names of scoped packages can begin with a dot or an underscore.
+         This is not permitted without a scope.
+
+       +o New packages must not have uppercase letters in the name.
+
+       +o The name ends up being part of a URL, an argument on the command
+         line, and a folder name. Therefore, the name can't contain any
+         non-URL-safe characters.
+
+
+       Some tips:
+
+       +o Don't use the same name as a core Node module.
+
+       +o Don't put "js" or "node" in the name.  It's assumed that it's js,
+         since you're writing a package.json file, and you can specify the
+         engine using the "engines" field.  (See below.)
+
+       +o The name will probably be passed as an argument to require(), so it
+         should be something short, but also reasonably descriptive.
+
+       +o You may want to check the npm registry to see if there's something by
+         that name already, before you get too attached to it.
+         https://www.npmjs.com/
+
+
+       A name can be optionally prefixed by a scope, e.g. @@mmyyoorrgg//mmyyppaacckkaaggee.
+       See npm help ssccooppee for more detail.
+
+   vveerrssiioonn
+       If you plan to publish your package, the _m_o_s_t important things in your
+       package.json are the name and version fields as they will be required.
+       The name and version together form an identifier that is assumed to be
+       completely unique.  Changes to the package should come along with
+       changes to the version. If you don't plan to publish your package, the
+       name and version fields are optional.
+
+       Version must be parseable by node-semver
+       _h_t_t_p_s_:_/_/_g_i_t_h_u_b_._c_o_m_/_i_s_a_a_c_s_/_n_o_d_e_-_s_e_m_v_e_r, which is bundled with npm as a
+       dependency.  (nnppmm iinnssttaallll sseemmvveerr to use it yourself.)
+
+       More on version numbers and ranges at npm help semver.
+
+   ddeessccrriippttiioonn
+       Put a description in it.  It's a string.  This helps people discover
+       your package, as it's listed in nnppmm sseeaarrcchh.
+
+   kkeeyywwoorrddss
+       Put keywords in it.  It's an array of strings.  This helps people
+       discover your package as it's listed in nnppmm sseeaarrcchh.
+
+   hhoommeeppaaggee
+       The url to the project homepage.
+
+       Example:
+
+         "homepage": "https://github.com/owner/project#readme"
+
+   bbuuggss
+       The url to your project's issue tracker and / or the email address to
+       which issues should be reported. These are helpful for people who
+       encounter issues with your package.
+
+       It should look like this:
+
+         { "url" : "https://github.com/owner/project/issues"
+         , "email" : "project@hostname.com"
+         }
+
+       You can specify either one or both values. If you want to provide only
+       a url, you can specify the value for "bugs" as a simple string instead
+       of an object.
+
+       If a url is provided, it will be used by the nnppmm bbuuggss command.
+
+   lliicceennssee
+       You should specify a license for your package so that people know how
+       they are permitted to use it, and any restrictions you're placing on
+       it.
+
+       If you're using a common license such as BSD-2-Clause or MIT, add a
+       current SPDX license identifier for the license you're using, like
+       this:
+
+         { "license" : "BSD-3-Clause" }
+
+       You can check the full list of SPDX license IDs
+       _h_t_t_p_s_:_/_/_s_p_d_x_._o_r_g_/_l_i_c_e_n_s_e_s_/.  Ideally you should pick one that is OSI
+       _h_t_t_p_s_:_/_/_o_p_e_n_s_o_u_r_c_e_._o_r_g_/_l_i_c_e_n_s_e_s_/_a_l_p_h_a_b_e_t_i_c_a_l approved.
+
+       If your package is licensed under multiple common licenses, use an SPDX
+       license expression syntax version 2.0 string
+       _h_t_t_p_s_:_/_/_w_w_w_._n_p_m_j_s_._c_o_m_/_p_a_c_k_a_g_e_/_s_p_d_x, like this:
+
+         { "license" : "(ISC OR GPL-3.0)" }
+
+       If you are using a license that hasn't been assigned an SPDX
+       identifier, or if you are using a custom license, use a string value
+       like this one:
+
+         { "license" : "SEE LICENSE IN <filename>" }
+
+       Then include a file named <<ffiilleennaammee>> at the top level of the package.
+
+       Some old packages used license objects or a "licenses" property
+       containing an array of license objects:
+
+         // Not valid metadata
+         { "license" :
+           { "type" : "ISC"
+           , "url" : "https://opensource.org/licenses/ISC"
+           }
+         }
+
+         // Not valid metadata
+         { "licenses" :
+           [
+             { "type": "MIT"
+             , "url": "https://www.opensource.org/licenses/mit-license.php"
+             }
+           , { "type": "Apache-2.0"
+             , "url": "https://opensource.org/licenses/apache2.0.php"
+             }
+           ]
+         }
+
+       Those styles are now deprecated. Instead, use SPDX expressions, like
+       this:
+
+         { "license": "ISC" }
+
+         { "license": "(MIT OR Apache-2.0)" }
+
+       Finally, if you do not wish to grant others the right to use a private
+       or unpublished package under any terms:
+
+         { "license": "UNLICENSED" }
+
+       Consider also setting ""pprriivvaattee"":: ttrruuee to prevent accidental
+       publication.
+
+   ppeeooppllee ffiieellddss:: aauutthhoorr,, ccoonnttrriibbuuttoorrss
+       The "author" is one person.  "contributors" is an array of people.  A
+       "person" is an object with a "name" field and optionally "url" and
+       "email", like this:
+
+         { "name" : "Barney Rubble"
+         , "email" : "b@rubble.com"
+         , "url" : "http://barnyrubble.tumblr.com/"
+         }
+
+       Or you can shorten that all into a single string, and npm will parse it
+       for you:
+
+         "Barney Rubble <b@rubble.com> (http://barnyrubble.tumblr.com/)"
+
+       Both email and url are optional either way.
+
+       npm also sets a top-level "maintainers" field with your npm user info.
+
+   ffuunnddiinngg
+       You can specify an object containing an URL that provides up-to-date
+       information about ways to help fund development of your package, or a
+       string URL, or an array of these:
+
+         "funding": {
+           "type" : "individual",
+           "url" : "http://example.com/donate"
+         }
+
+         "funding": {
+           "type" : "patreon",
+           "url" : "https://www.patreon.com/my-account"
+         }
+
+         "funding": "http://example.com/donate"
+
+         "funding": [
+           {
+             "type" : "individual",
+             "url" : "http://example.com/donate"
+           },
+           "http://example.com/donateAlso",
+           {
+             "type" : "patreon",
+             "url" : "https://www.patreon.com/my-account"
+           }
+         ]
+
+       Users can use the nnppmm ffuunndd subcommand to list the ffuunnddiinngg URLs of all
+       dependencies of their project, direct and indirect. A shortcut to visit
+       each funding url is also available when providing the project name such
+       as: nnppmm ffuunndd <<pprroojjeeccttnnaammee>> (when there are multiple URLs, the first one
+       will be visited)
+
+   ffiilleess
+       The optional ffiilleess field is an array of file patterns that describes
+       the entries to be included when your package is installed as a
+       dependency. File patterns follow a similar syntax to ..ggiittiiggnnoorree, but
+       reversed: including a file, directory, or glob pattern (**, ****//**, and
+       such) will make it so that file is included in the tarball when it's
+       packed. Omitting the field will make it default to [[""**""]], which means
+       it will include all files.
+
+       Some special files and directories are also included or excluded
+       regardless of whether they exist in the ffiilleess array (see below).
+
+       You can also provide a ..nnppmmiiggnnoorree file in the root of your package or
+       in subdirectories, which will keep files from being included. At the
+       root of your package it will not override the "files" field, but in
+       subdirectories it will. The ..nnppmmiiggnnoorree file works just like a
+       ..ggiittiiggnnoorree. If there is a ..ggiittiiggnnoorree file, and ..nnppmmiiggnnoorree is missing,
+       ..ggiittiiggnnoorree's contents will be used instead.
+
+       Files included with the "package.json#files" field _c_a_n_n_o_t be excluded
+       through ..nnppmmiiggnnoorree or ..ggiittiiggnnoorree.
+
+       Certain files are always included, regardless of settings:
+
+       +o ppaacckkaaggee..jjssoonn
+
+       +o RREEAADDMMEE
+
+       +o CCHHAANNGGEESS / CCHHAANNGGEELLOOGG / HHIISSTTOORRYY
+
+       +o LLIICCEENNSSEE / LLIICCEENNCCEE
+
+       +o NNOOTTIICCEE
+
+       +o The file in the "main" field
+
+
+       RREEAADDMMEE, CCHHAANNGGEESS, LLIICCEENNSSEE & NNOOTTIICCEE can have any case and extension.
+
+       Conversely, some files are always ignored:
+
+       +o ..ggiitt
+
+       +o CCVVSS
+
+       +o ..ssvvnn
+
+       +o ..hhgg
+
+       +o ..lloocckk--wwssccrriipptt
+
+       +o ..wwaaffppiicckkllee--NN
+
+       +o ..DDSS__SSttoorree
+
+       +o nnppmm--ddeebbuugg..lloogg
+
+       +o ..nnppmmrrcc
+
+       +o nnooddee__mmoodduulleess
+
+       +o ccoonnffiigg..ggyyppii
+
+       +o ppaacckkaaggee--lloocckk..jjssoonn (use shrinkwrap instead)
+
+       +o All files containing a ** character (incompatible with Windows)
+
+
+   mmaaiinn
+       The main field is a module ID that is the primary entry point to your
+       program.  That is, if your package is named ffoooo, and a user installs
+       it, and then does rreeqquuiirree((""ffoooo"")), then your main module's exports
+       object will be returned.
+
+       This should be a module ID relative to the root of your package folder.
+
+       For most modules, it makes the most sense to have a main script and
+       often not much else.
+
+   bbrroowwsseerr
+       If your module is meant to be used client-side the browser field should
+       be used instead of the main field. This is helpful to hint users that
+       it might rely on primitives that aren't available in Node.js modules.
+       (e.g. wwiinnddooww)
+
+   bbiinn
+       A lot of packages have one or more executable files that they'd like to
+       install into the PATH. npm makes this pretty easy (in fact, it uses
+       this feature to install the "npm" executable.)
+
+       To use this, supply a bbiinn field in your package.json which is a map of
+       command name to local file name. On install, npm will symlink that file
+       into pprreeffiixx//bbiinn for global installs, or ..//nnooddee__mmoodduulleess//..bbiinn// for local
+       installs.
+
+       For example, myapp could have this:
+
+         { "bin" : { "myapp" : "./cli.js" } }
+
+       So, when you install myapp, it'll create a symlink from the ccllii..jjss
+       script to //uussrr//llooccaall//bbiinn//mmyyaapppp.
+
+       If you have a single executable, and its name should be the name of the
+       package, then you can just supply it as a string.  For example:
+
+         { "name": "my-program"
+         , "version": "1.2.5"
+         , "bin": "./path/to/program" }
+
+       would be the same as this:
+
+         { "name": "my-program"
+         , "version": "1.2.5"
+         , "bin" : { "my-program" : "./path/to/program" } }
+
+       Please make sure that your file(s) referenced in bbiinn starts with
+       ##!!//uussrr//bbiinn//eennvv nnooddee, otherwise the scripts are started without the node
+       executable!
+
+   mmaann
+       Specify either a single file or an array of filenames to put in place
+       for the mmaann program to find.
+
+       If only a single file is provided, then it's installed such that it is
+       the result from mmaann <<ppkkggnnaammee>>, regardless of its actual filename.  For
+       example:
+
+         { "name" : "foo"
+         , "version" : "1.2.3"
+         , "description" : "A packaged foo fooer for fooing foos"
+         , "main" : "foo.js"
+         , "man" : "./man/doc.1"
+         }
+
+       would link the ..//mmaann//ddoocc..11 file in such that it is the target for mmaann
+       ffoooo
+
+       If the filename doesn't start with the package name, then it's
+       prefixed.  So, this:
+
+         { "name" : "foo"
+         , "version" : "1.2.3"
+         , "description" : "A packaged foo fooer for fooing foos"
+         , "main" : "foo.js"
+         , "man" : [ "./man/foo.1", "./man/bar.1" ]
+         }
+
+       will create files to do mmaann ffoooo and mmaann ffoooo--bbaarr.
+
+       Man files must end with a number, and optionally a ..ggzz suffix if they
+       are compressed.  The number dictates which man section the file is
+       installed into.
+
+         { "name" : "foo"
+         , "version" : "1.2.3"
+         , "description" : "A packaged foo fooer for fooing foos"
+         , "main" : "foo.js"
+         , "man" : [ "./man/foo.1", "./man/foo.2" ]
+         }
+
+       will create entries for mmaann ffoooo and mmaann 22 ffoooo
+
+   ddiirreeccttoorriieess
+       The CommonJS Packages _h_t_t_p_:_/_/_w_i_k_i_._c_o_m_m_o_n_j_s_._o_r_g_/_w_i_k_i_/_P_a_c_k_a_g_e_s_/_1_._0 spec
+       details a few ways that you can indicate the structure of your package
+       using a ddiirreeccttoorriieess object. If you look at npm's package.json
+       _h_t_t_p_s_:_/_/_r_e_g_i_s_t_r_y_._n_p_m_j_s_._o_r_g_/_n_p_m_/_l_a_t_e_s_t, you'll see that it has
+       directories for doc, lib, and man.
+
+       In the future, this information may be used in other creative ways.
+
+   ddiirreeccttoorriieess..lliibb
+       Tell people where the bulk of your library is.  Nothing special is done
+       with the lib folder in any way, but it's useful meta info.
+
+   ddiirreeccttoorriieess..bbiinn
+       If you specify a bbiinn directory in ddiirreeccttoorriieess..bbiinn, all the files in
+       that folder will be added.
+
+       Because of the way the bbiinn directive works, specifying both a bbiinn path
+       and setting ddiirreeccttoorriieess..bbiinn is an error. If you want to specify
+       individual files, use bbiinn, and for all the files in an existing bbiinn
+       directory, use ddiirreeccttoorriieess..bbiinn.
+
+   ddiirreeccttoorriieess..mmaann
+       A folder that is full of man pages.  Sugar to generate a "man" array by
+       walking the folder.
+
+   ddiirreeccttoorriieess..ddoocc
+       Put markdown files in here.  Eventually, these will be displayed
+       nicely, maybe, someday.
+
+   ddiirreeccttoorriieess..eexxaammppllee
+       Put example scripts in here.  Someday, it might be exposed in some
+       clever way.
+
+   ddiirreeccttoorriieess..tteesstt
+       Put your tests in here. It is currently not exposed, but it might be in
+       the future.
+
+   rreeppoossiittoorryy
+       Specify the place where your code lives. This is helpful for people who
+       want to contribute.  If the git repo is on GitHub, then the nnppmm ddooccss
+       command will be able to find you.
+
+       Do it like this:
+
+         "repository": {
+           "type" : "git",
+           "url" : "https://github.com/npm/cli.git"
+         }
+
+         "repository": {
+           "type" : "svn",
+           "url" : "https://v8.googlecode.com/svn/trunk/"
+         }
+
+       The URL should be a publicly available (perhaps read-only) url that can
+       be handed directly to a VCS program without any modification.  It
+       should not be a url to an html project page that you put in your
+       browser.  It's for computers.
+
+       For GitHub, GitHub gist, Bitbucket, or GitLab repositories you can use
+       the same shortcut syntax you use for nnppmm iinnssttaallll:
+
+         "repository": "npm/npm"
+
+         "repository": "github:user/repo"
+
+         "repository": "gist:11081aaa281"
+
+         "repository": "bitbucket:user/repo"
+
+         "repository": "gitlab:user/repo"
+
+       If the ppaacckkaaggee..jjssoonn for your package is not in the root directory (for
+       example if it is part of a monorepo), you can specify the directory in
+       which it lives:
+
+         "repository": {
+           "type" : "git",
+           "url" : "https://github.com/facebook/react.git",
+           "directory": "packages/react-dom"
+         }
+
+   ssccrriippttss
+       The "scripts" property is a dictionary containing script commands that
+       are run at various times in the lifecycle of your package.  The key is
+       the lifecycle event, and the value is the command to run at that point.
+
+       See npm help ssccrriippttss to find out more about writing package scripts.
+
+   ccoonnffiigg
+       A "config" object can be used to set configuration parameters used in
+       package scripts that persist across upgrades.  For instance, if a
+       package had the following:
+
+         { "name" : "foo"
+         , "config" : { "port" : "8080" } }
+
+       and then had a "start" command that then referenced the
+       nnppmm__ppaacckkaaggee__ccoonnffiigg__ppoorrtt environment variable, then the user could
+       override that by doing nnppmm ccoonnffiigg sseett ffoooo::ppoorrtt 88000011.
+
+       See npm help ccoonnffiigg and npm help ssccrriippttss for more on package configs.
+
+   ddeeppeennddeenncciieess
+       Dependencies are specified in a simple object that maps a package name
+       to a version range. The version range is a string which has one or more
+       space-separated descriptors.  Dependencies can also be identified with
+       a tarball or git URL.
+
+       PPlleeaassee ddoo nnoott ppuutt tteesstt hhaarrnneesssseess oorr ttrraannssppiilleerrss iinn yyoouurr ddeeppeennddeenncciieess
+       oobbjjeecctt..  See ddeevvDDeeppeennddeenncciieess, below.
+
+       See npm help semver for more details about specifying version ranges.
+
+       +o vveerrssiioonn Must match vveerrssiioonn exactly
+
+       +o >>vveerrssiioonn Must be greater than vveerrssiioonn
+
+       +o >>==vveerrssiioonn etc
+
+       +o <<vveerrssiioonn
+
+       +o <<==vveerrssiioonn
+
+       +o ~~vveerrssiioonn "Approximately equivalent to version"  See npm help semver
+
+       +o ^^vveerrssiioonn "Compatible with version"  See npm help semver
+
+       +o 11..22..xx 1.2.0, 1.2.1, etc., but not 1.3.0
+
+       +o hhttttpp::////...... See 'URLs as Dependencies' below
+
+       +o ** Matches any version
+
+       +o """" (just an empty string) Same as **
+
+       +o vveerrssiioonn11 -- vveerrssiioonn22 Same as >>==vveerrssiioonn11 <<==vveerrssiioonn22.
+
+       +o rraannggee11 |||| rraannggee22 Passes if either range1 or range2 are satisfied.
+
+       +o ggiitt...... See 'Git URLs as Dependencies' below
+
+       +o uusseerr//rreeppoo See 'GitHub URLs' below
+
+       +o ttaagg A specific version tagged and published as ttaagg  See npm help
+         ddiisstt--ttaagg
+
+       +o ppaatthh//ppaatthh//ppaatthh See Local Paths _#_l_o_c_a_l_-_p_a_t_h_s below
+
+
+       For example, these are all valid:
+
+         { "dependencies" :
+           { "foo" : "1.0.0 - 2.9999.9999"
+           , "bar" : ">=1.0.2 <2.1.2"
+           , "baz" : ">1.0.2 <=2.3.4"
+           , "boo" : "2.0.1"
+           , "qux" : "<1.0.0 || >=2.3.1 <2.4.5 || >=2.5.2 <3.0.0"
+           , "asd" : "http://asdf.com/asdf.tar.gz"
+           , "til" : "~1.2"
+           , "elf" : "~1.2.3"
+           , "two" : "2.x"
+           , "thr" : "3.3.x"
+           , "lat" : "latest"
+           , "dyl" : "file:../dyl"
+           }
+         }
+
+   UURRLLss aass DDeeppeennddeenncciieess
+       You may specify a tarball URL in place of a version range.
+
+       This tarball will be downloaded and installed locally to your package
+       at install time.
+
+   GGiitt UURRLLss aass DDeeppeennddeenncciieess
+       Git urls are of the form:
+
+         <protocol>://[<user>[:<password>]@]<hostname>[:<port>][:][/]<path>[#<commit-ish> | #semver:<semver>]
+
+       <<pprroottooccooll>> is one of ggiitt, ggiitt++sssshh, ggiitt++hhttttpp, ggiitt++hhttttppss, or ggiitt++ffiillee.
+
+       If ##<<ccoommmmiitt--iisshh>> is provided, it will be used to clone exactly that
+       commit. If the commit-ish has the format ##sseemmvveerr::<<sseemmvveerr>>, <<sseemmvveerr>> can
+       be any valid semver range or exact version, and npm will look for any
+       tags or refs matching that range in the remote repository, much as it
+       would for a registry dependency. If neither ##<<ccoommmmiitt--iisshh>> or
+       ##sseemmvveerr::<<sseemmvveerr>> is specified, then mmaasstteerr is used.
+
+       Examples:
+
+         git+ssh://git@github.com:npm/cli.git#v1.0.27
+         git+ssh://git@github.com:npm/cli#semver:^5.0
+         git+https://isaacs@github.com/npm/cli.git
+         git://github.com/npm/cli.git#v1.0.27
+
+   GGiittHHuubb UURRLLss
+       As of version 1.1.65, you can refer to GitHub urls as just "foo":
+       "user/foo-project".  Just as with git URLs, a ccoommmmiitt--iisshh suffix can be
+       included.  For example:
+
+         {
+           "name": "foo",
+           "version": "0.0.0",
+           "dependencies": {
+             "express": "expressjs/express",
+             "mocha": "mochajs/mocha#4727d357ea",
+             "module": "user/repo#feature\/branch"
+           }
+         }
+
+   LLooccaall PPaatthhss
+       As of version 2.0.0 you can provide a path to a local directory that
+       contains a package. Local paths can be saved using nnppmm iinnssttaallll --SS or
+       nnppmm iinnssttaallll ----ssaavvee, using any of these forms:
+
+         ../foo/bar
+         ~/foo/bar
+         ./foo/bar
+         /foo/bar
+
+       in which case they will be normalized to a relative path and added to
+       your ppaacckkaaggee..jjssoonn. For example:
+
+         {
+           "name": "baz",
+           "dependencies": {
+             "bar": "file:../foo/bar"
+           }
+         }
+
+       This feature is helpful for local offline development and creating
+       tests that require npm installing where you don't want to hit an
+       external server, but should not be used when publishing packages to the
+       public registry.
+
+   ddeevvDDeeppeennddeenncciieess
+       If someone is planning on downloading and using your module in their
+       program, then they probably don't want or need to download and build
+       the external test or documentation framework that you use.
+
+       In this case, it's best to map these additional items in a
+       ddeevvDDeeppeennddeenncciieess object.
+
+       These things will be installed when doing nnppmm lliinnkk or nnppmm iinnssttaallll from
+       the root of a package, and can be managed like any other npm
+       configuration param.  See npm help ccoonnffiigg for more on the topic.
+
+       For build steps that are not platform-specific, such as compiling
+       CoffeeScript or other languages to JavaScript, use the pprreeppaarree script
+       to do this, and make the required package a devDependency.
+
+       For example:
+
+         { "name": "ethopia-waza",
+           "description": "a delightfully fruity coffee varietal",
+           "version": "1.2.3",
+           "devDependencies": {
+             "coffee-script": "~1.6.3"
+           },
+           "scripts": {
+             "prepare": "coffee -o lib/ -c src/waza.coffee"
+           },
+           "main": "lib/waza.js"
+         }
+
+       The pprreeppaarree script will be run before publishing, so that users can
+       consume the functionality without requiring them to compile it
+       themselves.  In dev mode (ie, locally running nnppmm iinnssttaallll), it'll run
+       this script as well, so that you can test it easily.
+
+   ppeeeerrDDeeppeennddeenncciieess
+       In some cases, you want to express the compatibility of your package
+       with a host tool or library, while not necessarily doing a rreeqquuiirree of
+       this host.  This is usually referred to as a _p_l_u_g_i_n. Notably, your
+       module may be exposing a specific interface, expected and specified by
+       the host documentation.
+
+       For example:
+
+         {
+           "name": "tea-latte",
+           "version": "1.3.5",
+           "peerDependencies": {
+             "tea": "2.x"
+           }
+         }
+
+       This ensures your package tteeaa--llaattttee can be installed _a_l_o_n_g with the
+       second major version of the host package tteeaa only. nnppmm iinnssttaallll
+       tteeaa--llaattttee could possibly yield the following dependency graph:
+
+         <?><?><?> tea-latte@1.3.5
+         <?><?><?> tea@2.2.0
+
+       NNOOTTEE:: nnppmm vveerrssiioonnss 11 aanndd 22 wwiillll aauuttoommaattiiccaallllyy iinnssttaallll ppeeeerrDDeeppeennddeenncciieess
+       iiff tthheeyy aarree nnoott eexxpplliicciittllyy ddeeppeennddeedd uuppoonn hhiigghheerr iinn tthhee ddeeppeennddeennccyy ttrreeee..
+       IInn tthhee nneexxtt mmaajjoorr vveerrssiioonn ooff nnppmm ((nnppmm@@33)),, tthhiiss wwiillll nnoo lloonnggeerr bbee tthhee
+       ccaassee.. YYoouu wwiillll rreecceeiivvee aa wwaarrnniinngg tthhaatt tthhee ppeeeerrDDeeppeennddeennccyy iiss nnoott
+       iinnssttaalllleedd iinnsstteeaadd.. The behavior in npms 1 & 2 was frequently confusing
+       and could easily put you into dependency hell, a situation that npm is
+       designed to avoid as much as possible.
+
+       Trying to install another plugin with a conflicting requirement will
+       cause an error. For this reason, make sure your plugin requirement is
+       as broad as possible, and not to lock it down to specific patch
+       versions.
+
+       Assuming the host complies with semver _h_t_t_p_s_:_/_/_s_e_m_v_e_r_._o_r_g_/, only
+       changes in the host package's major version will break your plugin.
+       Thus, if you've worked with every 1.x version of the host package, use
+       ""^^11..00"" or ""11..xx"" to express this. If you depend on features introduced
+       in 1.5.2, use "">>== 11..55..22 << 22"".
+
+   bbuunnddlleeddDDeeppeennddeenncciieess
+       This defines an array of package names that will be bundled when
+       publishing the package.
+
+       In cases where you need to preserve npm packages locally or have them
+       available through a single file download, you can bundle the packages
+       in a tarball file by specifying the package names in the
+       bbuunnddlleeddDDeeppeennddeenncciieess array and executing nnppmm ppaacckk.
+
+       For example:
+
+       If we define a package.json like this:
+
+         {
+           "name": "awesome-web-framework",
+           "version": "1.0.0",
+           "bundledDependencies": [
+             "renderized", "super-streams"
+           ]
+         }
+
+       we can obtain aawweessoommee--wweebb--ffrraammeewwoorrkk--11..00..00..ttggzz file by running nnppmm ppaacckk.
+       This file contains the dependencies rreennddeerriizzeedd and ssuuppeerr--ssttrreeaammss which
+       can be installed in a new project by executing nnppmm iinnssttaallll
+       aawweessoommee--wweebb--ffrraammeewwoorrkk--11..00..00..ttggzz.  Note that the package names do not
+       include any versions, as that information is specified in ddeeppeennddeenncciieess.
+
+       If this is spelled ""bbuunnddlleeDDeeppeennddeenncciieess"", then that is also honored.
+
+   ooppttiioonnaallDDeeppeennddeenncciieess
+       If a dependency can be used, but you would like npm to proceed if it
+       cannot be found or fails to install, then you may put it in the
+       ooppttiioonnaallDDeeppeennddeenncciieess object.  This is a map of package name to version
+       or url, just like the ddeeppeennddeenncciieess object.  The difference is that
+       build failures do not cause installation to fail.  Running nnppmm iinnssttaallll
+       ----nnoo--ooppttiioonnaall will prevent these dependencies from being installed.
+
+       It is still your program's responsibility to handle the lack of the
+       dependency.  For example, something like this:
+
+         try {
+           var foo = require('foo')
+           var fooVersion = require('foo/package.json').version
+         } catch (er) {
+           foo = null
+         }
+         if ( notGoodFooVersion(fooVersion) ) {
+           foo = null
+         }
+
+         // .. then later in your program ..
+
+         if (foo) {
+           foo.doFooThings()
+         }
+
+       Entries in ooppttiioonnaallDDeeppeennddeenncciieess will override entries of the same name
+       in ddeeppeennddeenncciieess, so it's usually best to only put in one place.
+
+   eennggiinneess
+       You can specify the version of node that your stuff works on:
+
+         { "engines" : { "node" : ">=0.10.3 <0.12" } }
+
+       And, like with dependencies, if you don't specify the version (or if
+       you specify "*" as the version), then any version of node will do.
+
+       If you specify an "engines" field, then npm will require that "node" be
+       somewhere on that list. If "engines" is omitted, then npm will just
+       assume that it works on node.
+
+       You can also use the "engines" field to specify which versions of npm
+       are capable of properly installing your program.  For example:
+
+         { "engines" : { "npm" : "~1.0.20" } }
+
+       Unless the user has set the eennggiinnee--ssttrriicctt config flag, this field is
+       advisory only and will only produce warnings when your package is
+       installed as a dependency.
+
+   eennggiinneeSSttrriicctt
+       TThhiiss ffeeaattuurree wwaass rreemmoovveedd iinn nnppmm 33..00..00
+
+       Prior to npm 3.0.0, this feature was used to treat this package as if
+       the user had set eennggiinnee--ssttrriicctt. It is no longer used.
+
+   ooss
+       You can specify which operating systems your module will run on:
+
+         "os" : [ "darwin", "linux" ]
+
+       You can also blacklist instead of whitelist operating systems, just
+       prepend the blacklisted os with a '!':
+
+         "os" : [ "!win32" ]
+
+       The host operating system is determined by pprroocceessss..ppllaattffoorrmm
+
+       It is allowed to both blacklist, and whitelist, although there isn't
+       any good reason to do this.
+
+   ccppuu
+       If your code only runs on certain cpu architectures, you can specify
+       which ones.
+
+         "cpu" : [ "x64", "ia32" ]
+
+       Like the ooss option, you can also blacklist architectures:
+
+         "cpu" : [ "!arm", "!mips" ]
+
+       The host architecture is determined by pprroocceessss..aarrcchh
+
+   pprreeffeerrGGlloobbaall
+       DDEEPPRREECCAATTEEDD
+
+       This option used to trigger an npm warning, but it will no longer warn.
+       It is purely there for informational purposes. It is now recommended
+       that you install any binaries as local devDependencies wherever
+       possible.
+
+   pprriivvaattee
+       If you set ""pprriivvaattee"":: ttrruuee in your package.json, then npm will refuse
+       to publish it.
+
+       This is a way to prevent accidental publication of private
+       repositories.  If you would like to ensure that a given package is only
+       ever published to a specific registry (for example, an internal
+       registry), then use the ppuubblliisshhCCoonnffiigg dictionary described below to
+       override the rreeggiissttrryy config param at publish-time.
+
+   ppuubblliisshhCCoonnffiigg
+       This is a set of config values that will be used at publish-time. It's
+       especially handy if you want to set the tag, registry or access, so
+       that you can ensure that a given package is not tagged with "latest",
+       published to the global public registry or that a scoped module is
+       private by default.
+
+       Any config values can be overridden, but only "tag", "registry" and
+       "access" probably matter for the purposes of publishing.
+
+       See npm help ccoonnffiigg to see the list of config options that can be
+       overridden.
+
+   DDEEFFAAUULLTT VVAALLUUEESS
+       npm will default some values based on package contents.
+
+       +o ""ssccrriippttss"":: {{""ssttaarrtt"":: ""nnooddee sseerrvveerr..jjss""}} If there is a sseerrvveerr..jjss file
+         in the root of your package, then npm will default the ssttaarrtt command
+         to nnooddee sseerrvveerr..jjss.
+
+       +o ""ssccrriippttss""::{{""iinnssttaallll"":: ""nnooddee--ggyypp rreebbuuiilldd""}} If there is a bbiinnddiinngg..ggyypp
+         file in the root of your package and you have not defined an iinnssttaallll
+         or pprreeiinnssttaallll script, npm will default the iinnssttaallll command to compile
+         using node-gyp.
+
+       +o ""ccoonnttrriibbuuttoorrss"":: [[......]] If there is an AAUUTTHHOORRSS file in the root of your
+         package, npm will treat each line as a NNaammee <<eemmaaiill>> ((uurrll)) format,
+         where email and url are optional.  Lines which start with a ## or are
+         blank, will be ignored.
+
+
+   SSEEEE AALLSSOO
+
+       +o npm help semver
+
+       +o npm help init
+
+       +o npm help version
+
+       +o npm help config
+
+       +o npm help help
+
+       +o npm help install
+
+       +o npm help publish
+
+       +o npm help uninstall
+
+
+
+
+                                  August 2020                  PACKAGE.JSON(5)

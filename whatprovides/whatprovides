@@ -1,0 +1,166 @@
+#!/bin/bash
+set -e
+
+SCRIPT_NAME=$(basename "$(realpath "$0")")
+DB_PATH="/data/data/com.termux/files/usr/var/lib/whatprovides/whatprovides.db"
+DB_UPDATES_URL="https://dl.bintray.com/termux/metadata/whatprovides-db/whatprovides.db.gz"
+
+show_usage () {
+	{
+		echo
+		echo "Usage: $SCRIPT_NAME [-u] path/to/file"
+		echo "       $SCRIPT_NAME -p [-u] package"
+		echo
+		echo "Find out packages using specific files."
+		echo
+		echo "Options:"
+		echo
+		echo "  -h   Show this help."
+		echo
+		echo "  -p   Reverse mode. List all files owned by specified"
+		echo "       package."
+		echo
+		echo "  -u   Update the database."
+		echo
+		echo "  -q   Quiet mode. Suppress informational messages."
+		echo
+	} >&2
+}
+
+update_database() {
+	if [ -e "${DB_PATH}.gz" ]; then
+		if ! ${QUIET}; then
+			echo "[*] Cleaning up the remaining temporary files..." >&2
+		fi
+		rm -f "${DB_PATH}.gz"
+	fi
+
+	if ! ${QUIET}; then
+		echo "[*] Downloading the new database..." >&2
+		echo >&2
+
+		curl --fail --retry 3 --retry-connrefused --retry-delay 1 --location \
+			--output "${DB_PATH}.gz" "${DB_UPDATES_URL}"
+
+		echo >&2
+		echo "[*] Installing..." >&2
+	else
+		curl --silent --fail --retry 3 --retry-connrefused --retry-delay 1 \
+			--location --output "${DB_PATH}.gz" "${DB_UPDATES_URL}"
+	fi
+
+	rm -f "${DB_PATH}"
+	zcat "${DB_PATH}.gz" > "${DB_PATH}"
+	rm -f "${DB_PATH}.gz"
+
+	if ! ${QUIET}; then
+		echo "[*] Finished." >&2
+	fi
+}
+
+check_database() {
+	if [ ! -e "${DB_PATH}" ]; then
+		{
+			echo "Error: database is not available."
+			echo "Please run '${SCRIPT_NAME} -u' to create it."
+		} >&2
+		return 1
+	fi
+}
+
+REVERSE_MODE=false
+DO_UPDATE=false
+QUIET=false
+while (($# > 0)); do
+	case "$1" in
+		-h) show_usage; exit 0;;
+		-p) REVERSE_MODE=true;;
+		-q) QUIET=true;;
+		-u) DO_UPDATE=true;;
+		-*)
+			echo >&2
+			echo "Unknown option '$1'." >&2
+			show_usage
+			exit 1
+			;;
+		*)
+			break
+			;;
+	esac
+	shift 1
+done
+
+if ${DO_UPDATE}; then
+	update_database
+	[ $# -lt 1 ] && exit 0
+else
+	check_database
+fi
+
+if [ $# -lt 1 ]; then
+	{
+		echo
+		echo "Error: you have not specified the file or package."
+		echo
+	} >&2
+	exit 1
+fi
+
+if ${REVERSE_MODE}; then
+	if ! grep -qx '[a-z0-9_+-]\+' <<< "$1"; then
+		{
+			echo
+			echo "Error: package name '${1}' is not valid."
+			echo
+		} >&2
+		exit 1
+	fi
+
+	if ! sqlite3 "${DB_PATH}" \
+		"SELECT owned_file FROM 'whatprovides' WHERE package_name == '${1}' ORDER BY owned_file" \
+		| awk "{ if (substr(\$0, 1, 1) == \"/\") print \"${1}: \"\$0; else print \"${1}: ${PREFIX}/\"\$0 } END { if (NR == 0) exit 1 }"
+	then
+		{
+			echo
+			echo "Error: package '$1' is not found."
+			echo
+		} >&2
+		exit 1
+	fi
+else
+	NEWPREFIX=
+	FILE="$(realpath -sm "$1")"
+
+	if [[ "${PREFIX}/" = "${FILE}/"* || "${FILE}" = / ]]; then
+		# FILE is (((great...)grand)parent of) PREFIX, including root
+		if [ "${FILE}" = / ]; then
+			FILE=/.
+		fi
+
+		sqlite3 "${DB_PATH}" \
+			"SELECT DISTINCT package_name FROM 'whatprovides' ORDER BY package_name" \
+			| awk "{ print \$0\": ${FILE}\" }"
+		exit 0
+	fi
+
+	if [[ "${FILE}" = "${PREFIX}/"* ]]; then
+		# FILE is in PREFIX
+		FILE="${FILE##${PREFIX}/}"
+		NEWPREFIX="${PREFIX}/"
+	fi # else FILE is entirely separate from PREFIX (unlikely to be in DB)
+
+	FILE_ESC="${FILE//\'/\'\'}"
+	if ! sqlite3 "${DB_PATH}" \
+		"SELECT DISTINCT package_name FROM 'whatprovides' WHERE owned_file == '${FILE_ESC}' OR substr(owned_file, 1, ${#FILE} +1) == '${FILE_ESC}/' ORDER BY package_name" \
+		| awk "{ print \$0\": ${NEWPREFIX}${FILE}\" } END { if (NR == 0) exit 1 }"
+	then
+		{
+			echo
+			echo "Error: file '$1' is not found."
+			echo
+		} >&2
+		exit 1
+	fi
+fi
+
+exit 0

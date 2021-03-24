@@ -1,0 +1,283 @@
+#				   <-- Git -->
+
+git add -Af; git commit -am "Add"; git push -u --force origin master
+
+curl "https://api.github.com/orgs/#GHORG#/repos?per_page=1000" | grep -o 'git@[^"]*' | xargs -L1 git clone
+
+_______________________________________________________________________________
+
+#     <-- WGet & Downloading an entire remote directory -->
+
+wget -r –level=0 -E –ignore-length -x -k -p -e robots=off -np -N https://example.com
+
+#     <-- Download all images files with jpg extension -->
+wget -r -A .jpg http://site.with.images/url/
+
+#   <-- Download all mp3 music files, just change the above to -->
+wget -r -A .mp3 http://site.with.music/url/
+
+#     <-- Don't want the first two directories --cut-dirs=2 -->
+wget -r –level=0 -E –ignore-length -x -k -p -e robots=off -np -N --cut-dirs=2 http://example.com/
+
+#     <-- Need a Username & Password -->
+wget -r --user=(put username here) --password='(put password here)' –level=0 -E –ignore-length -x -k -p -e robots=off -np -N https://gist.github.com/NateWeiler
+
+#     <-- Add to ~/.bashrc or paste into terminal -->
+wgetod() {
+    NSLASH="$(echo "$1" | perl -pe 's|.*://[^/]+(.*?)/?$|\1|' | grep -o / | wc -l)"
+    NCUT=$((NSLASH > 0 ? NSLASH-1 : 0))
+    wget -r -nH --user-agent=Mozilla/5.0 --cut-dirs=$NCUT --no-parent --reject="index.html*" "$1"
+}
+# Usage: wgetod "http://example.com/x/"
+_______________________________________________________________________________
+#			<-- Prompt for Yes/No -->
+
+#   <-- Prompt a user for confirmation in bash script 'y' 'yes' or 'Enter' -->
+
+read -r -p "Are you sure? [Y/n]" response
+response=${response,,} #   <-- tolower
+if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
+   your-action-here
+fi
+
+# <-- Prompt for Yes/No input using read comm& & serve multiple languages -->
+
+set -- $(locale LC_MESSAGES)
+yesptrn="$1"; noptrn="$2"; yesword="$3"; noword="$4"
+
+while true; do
+    read -p "Install (${yesword} / ${noword})? " yn
+    case $yn in
+        ${yesptrn##^} ) make install; break;;
+        ${noptrn##^} ) exit;;
+        * ) echo "Answer ${yesword} / ${noword}.";;
+    esac
+done
+_______________________________________________________________________________
+#						   <-- Files -->
+#						<-- Remove Files -->
+
+#		<-- Find all empty files under a certain path. -->
+find /tmp -type f -empty
+
+#		<-- Find & remove multiple files such as .mp3 or .txt. -->
+find . -depth -type f -name "*.txt" -exec rm -rf {} \; && find . -depth -type f -name "*.mp3" -exec rm -rf {} \;
+
+#		<-- Find all .txt files & remove them -->
+find . -depth -type f -name "*.txt" -exec rm -rf {} \;
+
+#	<-- Find all the files under /home directory with name some-file.txt. -->
+find /home -name some-file.txt /home/some-file.txt
+
+# Find all .mp3 files more than 10MB & delete them in single command
+find / -type f -name *.mp3 -size +10M -exec rm -rf {} \;
+
+#						<-- Rename Files -->
+find . -depth -type f | while read FNAME; do mv "$FNAME" "${FNAME//Old/New}"; done
+
+# Find all the files whose name contains capital & small letters in /home dir
+find /home -iname some-file.txt ./some-file.txt ./Some-file.txt
+
+#				<-- Find all files with permissions -->
+#		<-- Find all hidden files -->
+find /tmp -type f -name ".*"
+
+#		<-- Find all Read Only files -->
+find / -perm /u=r
+
+#		<-- Find all Executable files -->
+find / -perm /a=x
+
+#		<-- Find all or single file under / root dir of owner root -->
+find / -user root -name some-file.txt
+
+#		<-- Find all files that belong to user under /home dir -->
+find /home -user some-file
+
+#	 <-- Find all files that belong to Group Developer under /home dir -->
+find /home -group developer
+
+#		<-- Find all .txt files of user Some-file under /home dir -->
+find /home -user some-file -iname "*.txt"
+
+#		<-- Find all files which are modified in so many days back -->
+
+#		<-- Find all the files which are modified 50 days back -->
+find / -mtime 50
+
+#		<-- Find all the files which are accessed 50 days back.
+find / -atime 50
+
+#	<-- Find all files modified more than 50 days & less than 100 days -->
+find / -mtime +50 –mtime -100
+
+#		<-- Find all the files which are changed in the last 1 hour -->
+find / -cmin -60
+
+#		<-- Find all the files which are modified in the last 1 hour -->
+find / -mmin -60
+
+#		<-- Find all the files which are accessed in the last 1 hour -->
+find / -amin -60
+
+#		<-- Find files bu their Size -->
+
+#		<-- Find all 50MB files -->
+find / -size 50M
+
+#		<-- Find all files greater than 50MB & less than 100MB -->
+find / -size +50M -size -100M
+
+#		<-- Find all 100MB files & delete them in single command -->
+find / -type f -size +100M -exec rm -f {} \;
+
+#		<-- Find all .mp3 more than 10MB & delete in single command -->
+find / -type f -name *.mp3 -size +10M -exec rm {} \;
+
+#		<-- Find all the files with certain permissions -->
+
+#		<-- Find all the files whose permissions are 777 -->
+find . -type f -perm 0777 -print
+
+find / -type f ! -perm 777
+
+#		<-- Find all the SGID bit files whose permissions set to 644 -->
+find / -perm 2644
+
+#		<-- Find all the Sticky Bit set files whose permission are 551 -->
+find / -perm 1551
+
+#		<-- Find all SUID set files -->
+find / -perm /u=s
+
+#		<-- Find all SGID set files -->
+find / -perm /g=s
+
+#		<-- Find all 777 permission files & chmod to permissions 644 -->
+find / -type f -perm 0777 -print -exec chmod 644 {} \;
+
+#						<-- Find all php files -->
+
+#		<-- Find all php files in a current working directory -->
+find . -type f -name some-file.php ./some-file.php
+
+#		<-- Find all php files in a directory -->
+find . -type f -name "*.php" ./some-file.php ./login.php ./index.php
+
+_______________________________________________________________________________
+#							<-- Folders -->
+
+#						<-- Rename Folders -->
+find . -depth -type d | while read FNAME; do echo "$FNAME" "${FNAME//Old/New}"; done
+
+#                         <-- Remove Empty Folders -->
+find . -depth -type d -exec rm -rf {} \; 2>/dev/null
+
+find . -type d -empty -delete
+
+#                         <-- Remove Folders by name -->
+find . -depth -type d -name ".git" -exec rm -rf {} \;
+
+#       <-- Find & remove multiple folders such as .git or .github -->
+find . -depth -type d -name ".git" -exec rm -rf {} \; && find . -depth -type d
+-name ".github" -exec rm -rf {} \;
+
+find . -type d -exec bash -c 'shopt -s nullglob; shopt -s dotglob; files=("$1"/*); [[ ${files[@]} ]] || rm -rf -v "$1"' -- {} \;
+
+#		<-- Find all Folders whose name is some-file in / Folder -->
+find / -type d -name Some-file /Some-file
+
+#		<-- Find all 777 permission Folders & chmod to 755 -->
+find / -type d -perm 777 -print -exec chmod 755 {} \;
+
+#		<-- To file all empty directories under a certain path -->
+find /tmp -type d -empty
+_______________________________________________________________________________
+#					<-- MSYS2 Installing -->
+ --needed --noconfirm
+
+#		<-- Install the pre-built binary packages -->
+pacman -S ${package-name} --needed --noconfirm
+
+#			<-- Download or clone the package folder -->
+#	<-- Then install the freshly built package(s) with pacman -->
+cd ${package-name}
+MINGW_INSTALLS=mingw64 makepkg-mingw -sLf
+pacman -U ${package-name}*.pkg.tar.xz --needed --noconfirm
+_______________________________________________________________________________
+#				###		  SheBangs      ###
+
+#							<-- Bash -->
+#!/bin/sh
+#!/bin/git
+#!/bin/bash
+
+#							<-- Python -->
+#!python3
+#!/usr/bin/python3
+#!/usr/bin/env python3
+
+#							<-- Perl -->
+#!/usr/bin/perl
+#!/usr/bin/env perl
+
+#						<-- TypeScript -->
+#!/usr/bin/ts
+#!/usr/bin/env ts
+_______________________________________________________________________________
+#							<-- FFmpeg -->
+
+#		<-- Convert Audio files -->
+ffmpeg -i input.mav output.mp3
+
+#		<-- Convert Video files -->
+ffmpeg -i input.webm output.mp4
+
+#		<-- To set audio stream to be Vorbis -->
+ffmpeg -i input.mp3 -c:a libvorbis output.ogg
+
+#		<-- Change the video & audio stream -->
+ffmpeg -i input.mp4 -c:v vp9 -c:a libvorbis output.mkv
+
+#		<-- Changing a single stream -->
+ffmpeg -i input.webm -c:v copy -c:a flac output.mkv
+
+(This comm& copies the video stream from input.webm into output.mkv
+& encodes the Vorbis audio stream into a FLAC. The -c flag is really
+powerful)
+
+#		<-- Changing a container -->
+ffmpeg -i input.webm -c:av copy output.mkv
+
+#		<-- Change the bitrate -->
+ffmpeg -i input.webm -c:a copy -c:v vp9 -b:v 1M output.mkv
+
+#		<-- Change the frame rate -->
+ffmpeg -i input.webm -c:a copy -c:v vp9 -r 30 output.mkv
+
+#		<-- Change the dimensions of your video -->
+ffmpeg -i input.mkv -c:a copy -s hd720 output.mkv
+
+#		<-- Set the width & height manually -->
+ffmpeg -i input.mkv -c:a copy -s 1280x720 output.mkv
+
+#				<-- Trimming -->
+ffmpeg -i input.mkv -c:av copy -ss 00:01:00 -t 10 output.mkv
+
+#		<-- Extracting audio -->
+ffmpeg -i input.mkv -vn audio_only.ogg
+
+#		<-- Making a GIF -->
+ffmpeg -i input.mkv output.gif
+_______________________________________________________________________________
+
+# NateWeiler
+# MasonPaulWeiler11311
+# nateweiler84@gmail.com
+# $Hustle4The$
+# $Hustle4$
+# Hummel31
+# OnThePaperChaseSince84
+# $ServerHustle$
+# PaulEugeneWeiler
+# PaulEugeneWeiler11191953

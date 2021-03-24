@@ -1,0 +1,51 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+clear
+
+echo "+--------------------+" ;
+echo "| Andro Security VIP |" ;
+echo "| Port Scan Not Crime|" ;
+echo "+--------------------+" ;
+echo ""
+echo "1. HOSTMAP HACKER TARGET"
+echo "2. WEBDAV SCANNING"
+echo "3. WORDPRESS BRUTE FORCE"
+echo "4. WORDPRESS ENUMERATION"
+echo "5. WORDPRESS INFO"
+echo "6. WORDPRESS PLUGINS"
+echo "7. WORDPRESS THEMES"
+echo "8. WORDPRESS USERS"
+echo "9. EXIT"
+echo ""
+read -p "Masukan Pilihan 1-9 : " h
+if [ $h -eq 1 ] ;
+then
+./modules/run1
+elif [ $h -eq 2 ] ;
+then
+./modules/run2
+elif [ $h -eq 3 ] ;
+then
+./modules/run3
+elif [ $h -eq 4 ] ;
+then
+./modules/run4
+elif [ $h -eq 5 ] ;
+then
+./modules/run5
+elif [ $h -eq 6 ] ;
+then
+./modules/run6
+elif [ $h -eq 7 ] ;
+then
+./modules/run7
+elif [ $h -eq 8 ] ;
+then
+./modules/run8
+elif [ $h -eq 9 ] ;
+then
+exit 0
+else
+echo "Pilihan Kosong!"
+exit 1
+fi

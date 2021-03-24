@@ -1,0 +1,24 @@
+# usage: pyter [-h] -r REF -i INPUT [-v] [-l {ja,en}]             [--force-token-mode]
+
+# Translation Error Rate Evaluator
+
+# optional arguments:
+
+  -h, --help            show this help message and
+                        exit
+
+  -r REF, --ref REF     Reference file
+
+  -i INPUT, --input INPUT
+                        Input(test) file
+
+  -v, --verbose         Show scores of each
+                        sentence.
+
+  -l {ja,en}, --lang {ja,en}
+                        Language
+
+  --force-token-mode    Use a space separated word
+                        as a unit
+
+# If you have an UnicodeEncodeError, try to set 'PYTHONIOENCODING' to your environment variables.

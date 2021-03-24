@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">      <!-- Unicode -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">   <!-- mobile -->
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}    /* text of title, etc. */
+html {-webkit-text-size-adjust: 100%;}               /* ios landscape no zoom */
+
+body {
+   margin-left: 12px;     /* offset the entire page for curved screens */
+   margin-right: 12px;    /* or padding: inside a border (margin outside) */
+}
+</style>
+<!-- plus analytics code, etc. -->
+<title>Android tkinter Sizing Demos</title>
+</head>
+
+<body>
+<h1>Android tkinter Sizing Demos</h1>
+
+<p>
+This page collects Android screenshots that capture the effects of 
+program font configurations and Pydroid 3 DPI settings on tkinter
+GUIs like those described  
+<A HREF="https://learning-python.com/using-tkinter-programs-on-android.html">here</A>.
+Both fonts and DPI can be tailored to better size GUIs to screens, as described in 
+more detail by the sidebar 
+<A HREF="https://learning-python.com/using-tkinter-programs-on-android.html#moreonfit">here</A>.
+For those keeping score, these shots were all taken on a Galaxy Note20 Ultra in 2020.
+For more Android tkinter demos, see this folder's <A HREF="../index.html">parent</A>.
+</p>
+
+<!-- ======================================================================= -->
+<!-- END CUSTOM HEADER -->
+<!-- ======================================================================= -->
+
+
+<!-- ======================================================================= -->
+<!-- START FLOATING TOP -->
+<!-- ======================================================================= -->
+
+
+<!-- HTML+styles+JavaScript for optional index floating Top button [2.0].  --> 
+<!-- Formatting targets are replaced with user configs by Py build script. -->
+<!-- All inline, to avoid extra requirements for custom HEADER.html files, -->
+<!-- (though browsers allow <style> blocks in <body>, as does HTML 5.2+).  -->  
+<!-- Top goes to page top only: use custom headers or edit this for other. -->
+
+<!-- Clients using a custom FOOTER.html may also need something like this:
+.finalelement {               /* add extra space above Top's bottom at end of page */
+    margin-bottom: 80px;      /* else, text at end may be overlayed and unviewable */
+}
+<P class=finalelement>        <==on the last content line or item (or <div>+padding, <br>)
+-->
+
+</P>
+<button onclick="topClick();" 
+        id="topBtn" 
+        title="Go to index"
+        style="
+    display: none;                   /* initially HIDDEN (changed on scroll iff JS) */
+    position: fixed;                 /* float/persist */
+    bottom: 36px;       /* e.g., above site toolbar */
+    right: 8px;                      /* left of scroll area */
+    z-index: 99;                     /* covering priority */
+    font-size: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;                 /* change on mouse-over */
+    padding: 10px;
+    border-radius: 4px;              /* rounded corners */
+    color: white;             /* foreground (text) color, default=white */
+    background-color: #999;  /* background color, default=grey */ 
+">Top</button>
+
+<!-- Set up click/scroll callbacks iff JS is enabled -->
+<script>
+
+// Get and save the button in global (window) scope
+var topButton = document.getElementById("topBtn");    // i.e., "Top" above
+
+// Set the default scroll constant: global so pages can change if needed
+var topButtonShowAt = 500;    // px from top, show Top below this cutoff
+
+function topClick() {
+    //
+    // Go to the top of page (but keep prior location in history for back).
+    // Clear hover shading (else recessed color gets stuck on mobile)?
+    // No: unhover doesn't work as tried for main site - punt on shading. 
+    //
+    window.location.href = '#';                    // go/scroll to top (no tag)
+    //topButton.style.backgroundColor = '#999';    // no: unhover for mobile?
+}
+
+function scrollFunction() {
+    //
+    // Adapted from web examples; the odd || test is for browser interoperability:
+    // see, for instance, https://dev.opera.com/articles/fixing-the-scrolltop-bug/.
+    //
+    // Clients can reset global topButtonShowAt for larger preambles; else Top 
+    // may appear above/before the actual # top content if it's not top of page.     
+    //
+    var showat = topButtonShowAt;  // local
+    // N pixels from the top after scroll?
+    if (document.body.scrollTop > showat || document.documentElement.scrollTop > showat) {
+        topButton.style.display = "block";   // show Top
+    } else {
+        topButton.style.display = "none";    // hide Top
+    }
+}
+
+// Show/hide button whenever user scrolls below/above N px from top
+window.onscroll = scrollFunction;   // source had "function() {scrollFunction()};"; why?
+</script>
+
+
+<!-- ======================================================================= -->
+<!-- END FLOATING TOP -->
+<!-- ======================================================================= -->
+
+
+<!-- ======================================================================= -->
+<!-- START THUMBS TABLE -->
+<!-- ======================================================================= -->
+
+
+<p>
+<div style="overflow-x: auto;">
+<table style="                        /* not used: table-layout:fixed; */
+    background-color: #f5f5f5;                     /* for fun (former 'white') */
+    width: 100%;                             /* expand table+borderlines */
+    margin-top: 5px; margin-bottom: 5px;      /* above/below borderlines */
+    padding-top: 25px; padding-bottom: 5px;   /* under/over borderlines  */
+    border-top: 1px solid black;              /* manual lines, _not_ <hr>s: */ 
+    border-bottom: 1px solid black;           /* chrome botches <hr> at zoom <= 90% */
+">
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/--dpi-settings-menu.jpg.html">
+	<img src="_thumbspage/--dpi-settings-menu.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">--dpi-settings-menu.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/1-note20--dpi-auto--font-default.jpg.html">
+	<img src="_thumbspage/1-note20--dpi-auto--font-default.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">1-note20--dpi-auto--font-default.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/2-note20--dpi-auto--font-config.jpg.html">
+	<img src="_thumbspage/2-note20--dpi-auto--font-config.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">2-note20--dpi-auto--font-config.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/3-note20--dpi-320--font-default.jpg.html">
+	<img src="_thumbspage/3-note20--dpi-320--font-default.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">3-note20--dpi-320--font-default.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/4-note20--dpi-320--font-config.jpg.html">
+	<img src="_thumbspage/4-note20--dpi-320--font-config.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">4-note20--dpi-320--font-config.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/5-note20--dpi-240--font-default.jpg.html">
+	<img src="_thumbspage/5-note20--dpi-240--font-default.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">5-note20--dpi-240--font-default.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/a-note20--dialog--dpi-auto.jpg.html">
+	<img src="_thumbspage/a-note20--dialog--dpi-auto.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">a-note20--dialog--dpi-auto.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/b-note20--dialog--dpi-320.jpg.html">
+	<img src="_thumbspage/b-note20--dialog--dpi-320.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">b-note20--dialog--dpi-320.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/c-note20--dialog--dpi-240.jpg.html">
+	<img src="_thumbspage/c-note20--dialog--dpi-240.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">c-note20--dialog--dpi-240.jpg</p></td>
+</tr>
+<tr>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/x-note20--dpi-auto--rotated.jpg.html">
+	<img src="_thumbspage/x-note20--dpi-auto--rotated.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">x-note20--dpi-auto--rotated.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/y-note20--dpi-auto--rotated-dlg.jpg.html">
+	<img src="_thumbspage/y-note20--dpi-auto--rotated-dlg.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">y-note20--dpi-auto--rotated-dlg.jpg</p></td>
+<td style="padding: 3px; text-align: center; width: 33%; color: black;">
+	<A href="_thumbspage/z-note20--dpi-320--rotated-dlg.jpg.html">
+	<img src="_thumbspage/z-note20--dpi-320--rotated-dlg.jpg" style="border: thin solid black;"></A>
+	<p style="white-space: nowrap; margin-top: 0px;">z-note20--dpi-320--rotated-dlg.jpg</p></td>
+</tr>
+</table></div></p>
+
+
+<!-- ======================================================================= -->
+<!-- END THUMBS TABLE -->
+<!-- ======================================================================= -->
+
+
+<!-- Generated 2020-09-15 @17:26:41, by thumbspage 2.0: learning-python.com/thumbspage.html -->
+
+
+<!-- ======================================================================= -->
+<!-- START DEFAULT FOOTER -->
+<!-- ======================================================================= -->
+
+
+<p style="margin-bottom: 80px;"><i>This page was generated by <A HREF="https://learning-python.com/thumbspage.html">thumbspage.py</A></i></p>
+</body></html>

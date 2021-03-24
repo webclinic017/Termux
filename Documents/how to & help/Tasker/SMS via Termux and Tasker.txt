@@ -1,0 +1,12 @@
+SMS via Termux (and Tasker)
+
+# Termux to send SMS messages from ssh commandline
+
+#!/data/data/com.termux/files/usr/bin/sh
+am broadcast --user 0 -a net.dinglish.tasker.sendsms -e numero "$1" -e texxt "$2" > /dev/null
+
+# The script is made executable and then one supplies with 2 arguments each enclosed in single quotes - the first one is a number (or several comma separated numbers) to send to; the second is the text message you want to send.
+
+On tasker one has to create a `profile` based on `event` called `intent received` from `system` category. In that Event you define an `action` named `net.dinglish.tasker.sendsms` - use whatever word you like instead of sendsms or keep it as it is. Then within that profile (which you can name whatever you like, btw) you add a `task` from category `phone`, the task being `send sms`. Within that task you set the phone number to the first variable - in my case it is `%numero` as you can see above. The message is the second variable and I called it `%texxt`. Once all that is set up you can log into your phone via ssh and send messages from your executable script.
+
+# For further reference: https://glow.li/technology/2016/4/03/pass-variables-from-termux-to-tasker/

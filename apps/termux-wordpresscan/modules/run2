@@ -1,0 +1,14 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+clear
+
+figlet WEBDAV SCAN
+
+echo -n "Masukan Url : "
+read b
+if [ ! -z $b ];
+then
+nmap -p80 --script /data/data/com.termux/files/usr/bin/modules/http-webdav-scan.nse $b
+else
+echo "Url Kosong!"
+fi

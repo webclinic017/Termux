@@ -1,0 +1,15 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+clear
+
+figlet WORDPRESS ENUM
+
+
+echo -n "Masukan Url : "
+read a
+if [ ! -z $a ]
+then
+nmap -p80 --script http-wordpress-enum $a
+else
+echo "Url Kosong!"
+fi

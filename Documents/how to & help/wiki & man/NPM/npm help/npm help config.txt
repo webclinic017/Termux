@@ -1,0 +1,78 @@
+NPM-CONFIG(1)                                                    NPM-CONFIG(1)
+
+
+
+NNAAMMEE
+       nnppmm--ccoonnffiigg - Manage the npm configuration files
+
+   SSyynnooppssiiss
+         npm config set <key> <value> [-g|--global]
+         npm config get <key>
+         npm config delete <key>
+         npm config list [-l] [--json]
+         npm config edit
+         npm get <key>
+         npm set <key> <value> [-g|--global]
+
+         aliases: c
+
+   DDeessccrriippttiioonn
+       npm gets its config settings from the command line, environment
+       variables, nnppmmrrcc files, and in some cases, the ppaacckkaaggee..jjssoonn file.
+
+       See npm help npmrc for more information about the npmrc files.
+
+       See npm help config for a more thorough discussion of the mechanisms
+       involved.
+
+       The nnppmm ccoonnffiigg command can be used to update and edit the contents of
+       the user and global npmrc files.
+
+   SSuubb--ccoommmmaannddss
+       Config supports the following sub-commands:
+
+   sseett
+         npm config set key value
+
+       Sets the config key to the value.
+
+       If value is omitted, then it sets it to "true".
+
+   ggeett
+         npm config get key
+
+       Echo the config value to stdout.
+
+   lliisstt
+         npm config list
+
+       Show all the config settings. Use --ll to also show defaults. Use ----jjssoonn
+       to show the settings in json format.
+
+   ddeelleettee
+         npm config delete key
+
+       Deletes the key from all configuration files.
+
+   eeddiitt
+         npm config edit
+
+       Opens the config file in an editor.  Use the ----gglloobbaall flag to edit the
+       global config.
+
+   SSeeee AAllssoo
+
+       +o npm help folders
+
+       +o npm help config
+
+       +o npm help package.json
+
+       +o npm help npmrc
+
+       +o npm help npm
+
+
+
+
+                                  August 2020                    NPM-CONFIG(1)

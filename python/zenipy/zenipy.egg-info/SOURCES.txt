@@ -1,0 +1,9 @@
+README.rst
+setup.py
+zenipy/__init__.py
+zenipy/zenipy.py
+zenipy.egg-info/PKG-INFO
+zenipy.egg-info/SOURCES.txt
+zenipy.egg-info/dependency_links.txt
+zenipy.egg-info/not-zip-safe
+zenipy.egg-info/top_level.txt

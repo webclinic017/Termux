@@ -1,0 +1,3 @@
+		MyServer
+
+MyServer is your own localhost server. You can setup PHP, Apache web servers on your android or linux like Ubuntu etc. It is Developed for android Termux or GNURoot. You can setup your localhost server and access from internet. You can host your website.

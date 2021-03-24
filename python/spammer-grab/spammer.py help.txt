@@ -1,0 +1,15 @@
+spammer.py — Grab Activation Code (GAC) spammer
+ author	loncat <me@lcat.dev>
+ url	https://github.com/p4kl0nc4t/Spammer-Grab
+
+Usage: spammer.py [OPTIONS] PHONE_NUM
+
+  This script will repeatedly send Grab Activation Code (GAC) to PHONE_NUM.
+  PHONE_NUM must be a phone number in international format (example:
+  6281323323232 with 62 prefix as the country code)
+
+Options:
+  -dl, --delay INTEGER      delay between each request wave
+  -li, --limit INTEGER      amount of request to send
+  -cc, --country_code TEXT  phone number country code
+  --help                    Show this message and exit.

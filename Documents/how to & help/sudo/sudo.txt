@@ -1,0 +1,7 @@
+sudo - run commands as root or another user 
+  usage: sudo command 
+  usage: sudo [-E] [-u USER] command 
+
+    Options:
+      -E          Preserve environment variables from the current shell.
+      -u USER 	Switch to USER instead of root..

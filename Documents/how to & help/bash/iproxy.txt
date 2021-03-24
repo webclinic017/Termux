@@ -1,0 +1,19 @@
+# Usage: iproxy [OPTIONS] LOCAL_PORT:DEVICE_PORT [LOCAL_PORT2:DEVICE_PORT2 ...]
+
+#Proxy that binds local TCP ports to be forwarded to the specified ports on a usbmux device.
+
+#OPTIONS:
+
+  -u, --udid UDID    target specific device by UDID
+
+  -n, --network      connect to network device
+
+  -l, --local        connect to USB device (default)
+
+  -s, --source ADDR  source address for listening socket (default 127.0.0.1)
+
+  -h, --help         prints usage information
+
+  -d, --debug        increase debug level
+
+  -v, --version      prints version information

@@ -1,0 +1,32 @@
+# dpkg debugging option, --debug=<octal> or -D<octal>:
+
+ Number  Ref. in source   Description
+      1  general          Generally helpful progress information
+
+      2  scripts          Invocation and status of maintainer scripts
+
+     10  eachfile         Output for each file processed
+
+    100  eachfiledetail   Lots of output for each file processed
+
+     20  conff            Output for each configuration file
+
+    200  conffdetail      Lots of output for each configuration file
+
+     40  depcon           Dependencies and conflicts
+
+    400  depcondetail     Lots of dependencies/conflicts output
+
+  10000  triggers         Trigger activation and processing
+
+  20000  triggersdetail   Lots of output regarding triggers
+
+  40000  triggersstupid   Silly amounts of output regarding triggers
+
+   1000  veryverbose      Lots of drivel about eg the dpkg/info directory
+
+   2000  stupidlyverbose  Insane amounts of drivel
+
+# Debugging options can be mixed using bitwise-or.
+
+# Note that the meanings and values are subject to change.

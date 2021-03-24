@@ -1,0 +1,14 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+clear
+
+figlet WORDPRESS THEMES
+
+echo -n "Masukan Url : "
+read e
+if [ ! -z $e ]
+then
+nmap -p80 --script /data/data/com.termux/files/usr/bin/modules/http-wordpress-themes.nse $e
+else
+echo "Url kosong!"
+fi

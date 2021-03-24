@@ -1,0 +1,74 @@
+dpkg forcing options - control behaviour when problems found:
+
+  warn but continue:  --force-<thing>,<thing>,...
+
+  stop with error:    --refuse-<thing>,<thing>,... | --no-force-<thing>,...
+
+ Forcing things:
+
+  [!] all                Set all force options
+
+  [*] security-mac       Use MAC based security if available
+
+  [*] downgrade          Replace a package with a lower version
+
+      configure-any      Configure any package which may help this one
+
+      hold               Install or remove incidental packages even when on hold
+
+      not-root           Try to (de)install things even when not root
+
+      bad-path           PATH is missing important programs, problems likely
+
+      bad-verify         Install a package even if it fails authenticity check
+
+      bad-version        Process even packages with wrong versions
+
+      statoverride-add   Overwrite an existing stat override when adding it
+
+      statoverride-remove Ignore a missing stat override when removing it
+
+      overwrite          Overwrite a file from one package with another
+
+      overwrite-diverted Overwrite a diverted file with an undiverted version
+
+  [!] overwrite-dir      Overwrite one package's directory with another's file
+
+  [!] unsafe-io          Do not perform safe I/O operations when unpacking
+
+  [!] script-chrootless  Do not chroot into maintainer script environment
+
+  [!] confnew            Always use the new config files, don't prompt
+
+  [!] confold            Always use the old config files, don't prompt
+
+  [!] confdef            Use the default option for new config files if one
+                         is available, don't prompt. If no default can be found,
+                         you will be prompted unless one of the confold or
+                         confnew options is also given
+
+  [!] confmiss           Always install missing config files
+
+  [!] confask            Offer to replace config files with no new versions
+
+  [!] architecture       Process even packages with wrong or no architecture
+
+  [!] breaks             Install even if it would break another package
+
+  [!] conflicts          Allow installation of conflicting packages
+
+  [!] depends            Turn all dependency problems into warnings
+
+  [!] depends-version    Turn dependency version problems into warnings
+
+  [!] remove-reinstreq   Remove packages which require installation
+
+  [!] remove-protected   Remove a protected package
+
+  [!] remove-essential   Remove an essential package
+
+WARNING - use of options marked [!] can seriously damage your installation.
+Forcing options marked [*] are enabled by default.
+
+Currently enabled options:
+ security-mac,downgrade

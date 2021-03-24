@@ -1,0 +1,165 @@
+NPM(1)                                                                  NPM(1)
+
+
+
+NNAAMMEE
+       nnppmm - javascript package manager
+
+   SSyynnooppssiiss
+         npm <command> [args]
+
+   VVeerrssiioonn
+       6.14.8
+
+   DDeessccrriippttiioonn
+       npm is the package manager for the Node JavaScript platform.  It puts
+       modules in place so that node can find them, and manages dependency
+       conflicts intelligently.
+
+       It is extremely configurable to support a wide variety of use cases.
+       Most commonly, it is used to publish, discover, install, and develop
+       node programs.
+
+       Run nnppmm hheellpp to get a list of available commands.
+
+   IImmppoorrttaanntt
+       npm is configured to use npm, Inc.'s public registry at
+       https://registry.npmjs.org by default. Use of the npm public registry
+       is subject to terms of use available at
+       https://www.npmjs.com/policies/terms.
+
+       You can configure npm to use any compatible registry you like, and even
+       run your own registry. Use of someone else's registry may be governed
+       by their terms of use.
+
+   IInnttrroodduuccttiioonn
+       You probably got npm because you want to install stuff.
+
+       Use nnppmm iinnssttaallll bblleerrgg to install the latest version of "blerg".  Check
+       out npm help iinnssttaallll for more info.  It can do a lot of stuff.
+
+       Use the nnppmm sseeaarrcchh command to show everything that's available.  Use
+       nnppmm llss to show everything you've installed.
+
+   DDeeppeennddeenncciieess
+       If a package references to another package with a git URL, npm depends
+       on a preinstalled git.
+
+       If one of the packages npm tries to install is a native node module and
+       requires compiling of C++ Code, npm will use node-gyp
+       _h_t_t_p_s_:_/_/_g_i_t_h_u_b_._c_o_m_/_n_o_d_e_j_s_/_n_o_d_e_-_g_y_p for that task.  For a Unix system,
+       node-gyp _h_t_t_p_s_:_/_/_g_i_t_h_u_b_._c_o_m_/_n_o_d_e_j_s_/_n_o_d_e_-_g_y_p needs Python, make and a
+       buildchain like GCC. On Windows, Python and Microsoft Visual Studio C++
+       are needed.  For more information visit the node-gyp repository
+       _h_t_t_p_s_:_/_/_g_i_t_h_u_b_._c_o_m_/_n_o_d_e_j_s_/_n_o_d_e_-_g_y_p and the node-gyp Wiki
+       _h_t_t_p_s_:_/_/_g_i_t_h_u_b_._c_o_m_/_n_o_d_e_j_s_/_n_o_d_e_-_g_y_p_/_w_i_k_i.
+
+   DDiirreeccttoorriieess
+       See npm help ffoollddeerrss to learn about where npm puts stuff.
+
+       In particular, npm has two modes of operation:
+
+       +o global mode: npm installs packages into the install prefix at
+         pprreeffiixx//lliibb//nnooddee__mmoodduulleess and bins are installed in pprreeffiixx//bbiinn.
+
+       +o local mode: npm installs packages into the current project directory,
+         which defaults to the current working directory.  Packages are
+         installed to ..//nnooddee__mmoodduulleess, and bins are installed to
+         ..//nnooddee__mmoodduulleess//..bbiinn.
+
+
+       Local mode is the default.  Use --gg or ----gglloobbaall on any command to
+       operate in global mode instead.
+
+   DDeevveellooppeerr UUssaaggee
+       If you're using npm to develop and publish your code, check out the
+       following help topics:
+
+       +o json: Make a package.json file.  See npm help ppaacckkaaggee..jjssoonn.
+
+       +o link: For linking your current working code into Node's path, so that
+         you don't have to reinstall every time you make a change.  Use nnppmm
+         lliinnkk to do this.
+
+       +o install: It's a good idea to install things if you don't need the
+         symbolic link.  Especially, installing other peoples code from the
+         registry is done via nnppmm iinnssttaallll
+
+       +o adduser: Create an account or log in.  Credentials are stored in the
+         user config file.
+
+       +o publish: Use the nnppmm ppuubblliisshh command to upload your code to the
+         registry.
+
+
+   CCoonnffiigguurraattiioonn
+       npm is extremely configurable.  It reads its configuration options from
+       5 places.
+
+       +o Command line switches: Set a config with ----kkeeyy vvaall.  All keys take a
+         value, even if they are booleans (the config parser doesn't know what
+         the options are at the time of parsing).  If no value is provided,
+         then the option is set to boolean ttrruuee.
+
+       +o Environment Variables: Set any config by prefixing the name in an
+         environment variable with nnppmm__ccoonnffiigg__.  For example, eexxppoorrtt
+         nnppmm__ccoonnffiigg__kkeeyy==vvaall.
+
+       +o User Configs: The file at $HOME/.npmrc is an ini-formatted list of
+         configs.  If present, it is parsed.  If the uusseerrccoonnffiigg option is set
+         in the cli or env, then that will be used instead.
+
+       +o Global Configs: The file found at ../etc/npmrc (from the node
+         executable, by default this resolves to /usr/local/etc/npmrc) will be
+         parsed if it is found.  If the gglloobbaallccoonnffiigg option is set in the cli,
+         env, or user config, then that file is parsed instead.
+
+       +o Defaults: npm's default configuration options are defined in
+         lib/utils/config-defs.js.  These must not be changed.
+
+
+       See npm help ccoonnffiigg for much much more information.
+
+   CCoonnttrriibbuuttiioonnss
+       Patches welcome!
+
+       If you would like to contribute, but don't know what to work on, read
+       the contributing guidelines and check the issues list.
+
+       +o CONTRIBUTING.md
+         _h_t_t_p_s_:_/_/_g_i_t_h_u_b_._c_o_m_/_n_p_m_/_c_l_i_/_b_l_o_b_/_l_a_t_e_s_t_/_C_O_N_T_R_I_B_U_T_I_N_G_._m_d
+
+       +o Bug tracker _h_t_t_p_s_:_/_/_g_i_t_h_u_b_._c_o_m_/_n_p_m_/_c_l_i_/_i_s_s_u_e_s
+
+
+   BBuuggss
+       When you find issues, please report them:
+
+       +o web: https://npm.community/c/bugs
+
+
+       Be sure to follow the template and bug reporting guidelines. You can
+       also ask for help in the support forum _h_t_t_p_s_:_/_/_n_p_m_._c_o_m_m_u_n_i_t_y_/_c_/_s_u_p_p_o_r_t
+       if you're unsure if it's actually a bug or are having trouble coming up
+       with a detailed reproduction to report.
+
+   AAuutthhoorr
+       Isaac Z. Schlueter _h_t_t_p_:_/_/_b_l_o_g_._i_z_s_._m_e_/ :: isaacs
+       _h_t_t_p_s_:_/_/_g_i_t_h_u_b_._c_o_m_/_i_s_a_a_c_s_/ :: @izs _h_t_t_p_s_:_/_/_t_w_i_t_t_e_r_._c_o_m_/_i_z_s :: i@izs.me
+
+   SSeeee AAllssoo
+
+       +o npm help help
+
+       +o npm help package.json
+
+       +o npm help install
+
+       +o npm help config
+
+       +o npm help npmrc
+
+
+
+
+                                  August 2020                           NPM(1)

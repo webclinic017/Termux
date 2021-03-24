@@ -1,0 +1,56 @@
+[user]
+	email = nateweiler84@gmail.com
+	name = NateWeiler
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	msg = commit --allow-empty -m
+	amend = commit --amend
+	count = shortlog -sn
+	undo = reset --soft HEAD^
+[color]
+	status = auto
+	branch = auto
+	diff = auto
+[core]
+	excludesfile = ~/.gitignore_global
+	quotepath = false
+	commitGraph = true
+	longpaths = true
+[help]
+	autocorrect = 1
+[rerere]
+	enabled = 1
+[credential]
+	helper = cache
+	writeLog = true
+[init]
+	defaultBranch = master
+[receive]
+	advertisePushOptions = true
+[gc]
+	writeCommitGraph = true
+[advice]
+	pushUpdateRejected = false
+	pushNonFFCurrent = false
+	pushNonFFMatching = false
+	pushAlreadyExists = false
+	pushFetchFirst = false
+	pushNeedsForce = false
+	statusHints = false
+	statusUoption = false
+	commitBeforeMerge = false
+	resolveConflict = false
+	implicitIdentity = false
+	detachedHead = false
+	amWorkDir = false
+	rmHints = false
+[push]
+	default = simple
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
